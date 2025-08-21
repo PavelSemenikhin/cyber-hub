@@ -27,7 +27,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "tournaments",
-    "accounts",
+    "accounts.apps.AccountsConfig",
     "blog",
 ]
 

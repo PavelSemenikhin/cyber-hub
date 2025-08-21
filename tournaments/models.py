@@ -55,6 +55,7 @@ class TournamentApplication(models.Model):
 
     class Meta:
         unique_together = ("tournament", "user")
+        ordering = ["-created_at"]
 
     def __str__(self):
         return f"{self.user.username} in {self.tournament.title}"
