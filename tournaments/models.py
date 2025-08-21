@@ -12,6 +12,7 @@ class Game(models.Model):
     def __str__(self):
         return self.name
 
+
 #Сам турнір який має гру, та власника, має статус дату початку та кінця, опис та призовий фонд, упорядковування по даті початку
 class Tournament(models.Model):
     STATUS_CHOICES = [
@@ -29,13 +30,14 @@ class Tournament(models.Model):
     prize_pool = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
+
     class Meta:
         ordering = ["-start_at"]
 
     def __str__(self):
         return f"{self.title} ({self.get_status_display()})"
 
-
+#Застосунок(форма) для подачі заявок на участь в турнірі
 class TournamentApplication(models.Model):
     APPLICATION_STATUS_CHOICES = [
         ("pending", "Pending"),

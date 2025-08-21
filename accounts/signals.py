@@ -7,6 +7,7 @@ from accounts.models import Profile
 
 User = get_user_model()
 
+#Сигнал який створює профіль(Profile) автоматично під час створення користувача(User)
 @receiver(post_save, sender=User)
 def create_user_profile(sender, instance, created, **kwargs):
     if created:

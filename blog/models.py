@@ -3,7 +3,7 @@ from django.conf import settings
 
 # Моделі для блогу
 
-
+#Пост користувача
 class Post(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="posts")
     title = models.CharField(max_length=200, null=False, blank=False)
@@ -11,6 +11,7 @@ class Post(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     is_published = models.BooleanField(default=True)
+
 
     class Meta:
         ordering = ["-created_at"]
@@ -23,12 +24,14 @@ class Post(models.Model):
         return self.title
 
 
+#Коментарі до поста
 class Comment(models.Model):
     owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
     post = models.ForeignKey(Post,on_delete=models.CASCADE, related_name="comments")
     body = models.TextField(null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
     is_deleted = models.BooleanField(default=False)
+
 
     class Meta:
         ordering = ["created_at"]

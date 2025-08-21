@@ -4,13 +4,14 @@ from django.db import models
 
 
 # Модель користувача
-
 class User(AbstractUser):
     pass
 
     def __str__(self):
         return self.username
 
+
+#Профіль користувача 1/1
 class Profile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="profile")
     nickname = models.CharField(max_length=50, blank=True)
