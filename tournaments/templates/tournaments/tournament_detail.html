@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1>{{ tournament.title }}</h1>
+    <p class="text-muted">Створено: {{ tournament.created_at|date:"d.m.Y" }}</p>
+
+    <hr>
+
+    <p><strong>Опис:</strong> {{ tournament.description }}</p>
+    <p><strong>Гра:</strong> {{ tournament.game }}</p>
+    <p><strong>Статус:</strong> {{ tournament.status }}</p>
+
+   <a href="{% url 'tournaments:tournament-list' %}" class="btn btn-secondary mt-3">← Назад до списку</a>
+
+  </div>
+{% endblock %}

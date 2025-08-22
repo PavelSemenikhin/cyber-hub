@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Головна — CyberHub{% endblock %}
+
+{% block content %}
+<div class="text-center text-white bg-dark py-5" style="min-height: 80vh;">
+    <div class="container">
+        <h1 class="display-4 fw-bold">Основний текст<br>про мій сайт</h1>
+        <p class="lead mt-3">
+            Тут додай крутий дискріпшн на пару строк (2–3) до заголовка<br>
+            з короткою подачею про призначення сайту
+        </p>
+
+        <div class="d-flex justify-content-center mt-4 gap-3 flex-wrap">
+            <a href="#" class="btn btn-outline-light px-4 py-2">?</a>
+            <a href="{% url 'home' %}" class="btn btn-light px-4 py-2">Переглянути турніри</a>
+        </div>
+    </div>
+</div>
+
+<!-- Блок із зображенням нижче -->
+<div>
+    <img src="https://images.unsplash.com/photo-1755282464755-ef4e95c6bae1?q=80&w=1170&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+         class="img-fluid w-100" alt="Геройське зображення">
+</div>
+{% endblock %}
