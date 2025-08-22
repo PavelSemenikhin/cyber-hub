@@ -1,0 +1,30 @@
+{% extends "base.html" %}
+
+{% block title %}Мій профіль{% endblock %}
+
+{% block content %}
+  <div class="card bg-secondary text-light p-4">
+    <h2 class="mb-3">Мій профіль</h2>
+
+    {% if profile.avatar %}
+      <img src="{{ profile.avatar.url }}" alt="Аватар" class="img-thumbnail mb-3" style="max-width: 150px;">
+    {% endif %}
+
+    <p><strong>Нікнейм:</strong> {{ profile.nickname }}</p>
+    <p><strong>Ім'я користувача:</strong> {{ user.username }}</p>
+    <p><strong>Email:</strong> {{ user.email }}</p>
+
+    <p><strong>Улюблені ігри:</strong>
+      {% for game in profile.favorite_games.all %}
+        {{ game.name }}{% if not forloop.last %}, {% endif %}
+      {% empty %}
+        Не вказано
+      {% endfor %}
+    </p>
+
+    <p><strong>Discord:</strong> {{ profile.discord }}</p>
+    <p><strong>Telegram:</strong> {{ profile.telegram }}</p>
+
+    <a href="{% url 'accounts:profile-update' %}" class="btn btn-outline-light mt-3">Редагувати профіль</a>
+  </div>
+{% endblock %}

@@ -19,7 +19,7 @@
     <!-- Навігаційна панель -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark border-bottom border-secondary">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">CYBERHUB</a>
+            <a class="navbar-brand" href="{% url 'home' %}">CYBERHUB</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarNav" aria-controls="navbarNav"
                     aria-expanded="false" aria-label="Toggle navigation">
@@ -35,7 +35,22 @@
                         <a class="nav-link" href="{% url 'blog:blog' %}">Блог</a>
                     </li>
                 </ul>
-                <a href="{% url 'accounts:accounts' %}" class="btn btn-outline-light">Увійти</a>
+
+                {% if user.is_authenticated %}
+                    <span class="navbar-text me-3">
+                        Привіт, {{ user.username }}!
+                    </span>
+                    <a href="{% url 'accounts:profile' %}" class="btn btn-outline-light me-2">Профіль</a>
+
+                    <!-- Логаут через POST -->
+                    <form method="post" action="{% url 'logout' %}" class="d-inline">
+                        {% csrf_token %}
+                        <button type="submit" class="btn btn-danger">Вийти</button>
+                    </form>
+                {% else %}
+                    <a href="{% url 'login' %}" class="btn btn-outline-light me-2">Увійти</a>
+                    <a href="{% url 'accounts:register' %}" class="btn btn-primary">Реєстрація</a>
+                {% endif %}
             </div>
         </div>
     </nav>

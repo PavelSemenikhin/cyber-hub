@@ -1,11 +1,18 @@
-from django.urls import path
+from django.urls import path, include
 
-from accounts.views import AccountsView
+from accounts.views import RegisterView, ProfileView, ProfileUpdateView
 
 app_name = "accounts"
 
 #Роути для акаунтів
 urlpatterns = [
-    path("login/", AccountsView.as_view(), name="accounts"),
-]
 
+    #Реєстрація
+    path("register/", RegisterView.as_view(), name="register"),
+
+    #Профіль користувача
+    path("profile/", ProfileView.as_view(), name="profile"),
+
+    path("profile/update/", ProfileUpdateView.as_view(), name="profile-update"),
+
+]
