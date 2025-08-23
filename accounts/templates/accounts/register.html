@@ -1,30 +1,60 @@
-{% extends "base.html" %}
+{% extends "base_auth.html" %}
+{% load static %}
+
+{% block title %}Sign up — CyberHub{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
 
 {% block content %}
-<div class="container mt-4">
-  <h2 class="mb-4">Реєстрація</h2>
+<div class="auth-container">
 
-  <form method="post" class="bg-dark p-4 rounded border border-secondary">
-    {% csrf_token %}
+  <!-- Ліва частина з зображенням -->
+  <div class="auth-image-wrapper">
+    <img src="{% static 'img/registration.jpg' %}" alt="Gamepad" class="auth-image">
+    <a href="{% url 'home' %}" class="logo-overlay">
+      <img src="{% static 'img/logo.svg' %}" alt="CyberHub Logo">
+    </a>
+  </div>
 
-    {% if form.errors %}
-      <div class="alert alert-danger">
-        <ul class="mb-0">
-          {% for field in form %}
-            {% for error in field.errors %}
-              <li>{{ error }}</li>
-            {% endfor %}
-          {% endfor %}
-          {% for error in form.non_field_errors %}
-            <li>{{ error }}</li>
-          {% endfor %}
-        </ul>
+  <!-- Права частина з формою -->
+  <div class="auth-form">
+    <div class="auth-box">
+      <div class="text-center fingerprint-icon mb-3">
+        <img src="{% static 'img/fingerprint.svg' %}" alt="Fingerprint Icon" class="fingerprint">
       </div>
-    {% endif %}
 
-    {{ form.as_p }}
+      <h2 class="text-center">Create account</h2>
 
-    <button type="submit" class="btn btn-primary mt-2">Зареєструватися</button>
-  </form>
+      <form method="post">
+        {% csrf_token %}
+
+        {% for field in form %}
+          {% if field.errors %}
+            {% for error in field.errors %}
+              <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+          {% endif %}
+
+          <input
+            type="{{ field.field.widget.input_type }}"
+            name="{{ field.name }}"
+            id="id_{{ field.name }}"
+            placeholder="{{ field.label }}"
+            value="{{ field.value|default_if_none:'' }}"
+            {% if field.field.required %}required{% endif %}
+          >
+        {% endfor %}
+
+        <button type="submit">Register</button>
+      </form>
+
+      <div class="links mt-3">
+        <a href="{% url 'login' %}">Already have an account? Log in</a>
+      </div>
+    </div>
+  </div>
+
 </div>
 {% endblock %}
