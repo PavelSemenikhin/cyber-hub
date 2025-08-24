@@ -83,3 +83,32 @@ html, body {
     color: #aaaaaa;
     text-decoration: underline;
 }
+
+.game-logos {
+  margin-bottom: 90px !important;
+}
+
+.custom-card img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-row {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.no-wrap-cards {
+  flex-wrap: nowrap !important;
+  overflow-x: auto;
+  padding-bottom: 10px;
+}
+
+.custom-card {
+  width: 362px;
+  height: 538px;
+  background: transparent;
+  border: none;
+  flex: 0 0 auto;
+}

@@ -1,25 +1,61 @@
 {% extends "base.html" %}
+{% load static %}
+
 {% block title %}Головна — CyberHub{% endblock %}
 
 {% block content %}
-<div class="text-center text-white bg-dark py-5" style="min-height: 80vh;">
-    <div class="container">
-        <h1 class="display-4 fw-bold">Основний текст<br>про мій сайт</h1>
-        <p class="lead mt-3">
-            Тут  додай крутий дискріпшн на пару строк (2–3) до заголовка<br>
-            з короткою подачею про призначення сайту
-        </p>
 
-        <div class="d-flex justify-content-center mt-4 gap-3 flex-wrap">
-            <a href="#" class="btn btn-outline-light px-4 py-2">?</a>
-            <a href="{% url 'home' %}" class="btn btn-light px-4 py-2">Переглянути турніри</a>
-        </div>
+<!-- Hero Section -->
+<section class="hero-section d-flex flex-column align-items-center text-white text-center px-3"
+         style="background-color: #0f0f0f; padding-top: 120px; padding-bottom: 40px;">
+
+  <!-- Заголовок + текст + кнопка -->
+  <div>
+    <h1 class="display-3 fw-bold mb-4">The Ultimate Esports &<br>Gaming Hub</h1>
+    <p class="lead text-secondary mb-5">
+      Discover esports events, share insights,<br>and connect with passionate players worldwide.
+    </p>
+    <a href="{% url 'tournaments:tournament-list' %}" class="btn btn-light btn-lg rounded-pill px-5 py-3">
+      Explore Tournaments
+    </a>
+  </div>
+
+  <!-- Відступ між кнопкою і логотипами -->
+  <div style="height: 60px;"></div>
+
+  <!-- Логотипи (во всю ширину) -->
+  <div class="game-logos container-fluid px-0 mb-5">
+    <img src="{% static 'img/logos.png' %}" alt="Game Logos"
+         class="w-100" style="opacity: 0.9;">
+  </div>
+
+</section>
+
+<!-- Cards Section -->
+<section class="py-5" style="background-color: #0f0f0f;">
+  <div class="container-fluid d-flex justify-content-center px-0 no-wrap-cards">
+
+    <div class="custom-card me-3">
+      <img src="{% static 'img/dota2.jpg' %}" class="w-100 h-100 rounded-3 object-fit-cover" alt="Game Poster 1">
     </div>
-</div>
 
-<!-- Блок із зображенням нижче -->
-<div>
-    <img src="https://images.unsplash.com/photo-1511512578047-dfb367046420?q=80&w=1171&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-         class="img-fluid w-100" alt="Геройське зображення">
-</div>
+    <div class="custom-card me-3">
+      <img src="{% static 'img/fc25.jpg' %}" class="w-100 h-100 rounded-3 object-fit-cover" alt="Game Poster 2">
+    </div>
+
+    <div class="custom-card me-3">
+      <img src="{% static 'img/pubg.jpg' %}" class="w-100 h-100 rounded-3 object-fit-cover" alt="Game Poster 3">
+    </div>
+
+    <div class="custom-card me-3">
+      <img src="{% static 'img/cs2.jpg' %}" class="w-100 h-100 rounded-3 object-fit-cover" alt="Game Poster 4">
+    </div>
+
+    <div class="custom-card">
+      <img src="{% static 'img/fortnite.jpg' %}" class="w-100 h-100 rounded-3 object-fit-cover" alt="Game Poster 5">
+    </div>
+
+  </div>
+</section>
+
 {% endblock %}
