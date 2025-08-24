@@ -8,6 +8,14 @@ html, body {
     font-family: 'Segoe UI', sans-serif;
 }
 
+html {
+    overflow-y: scroll;
+}
+
+body {
+    overflow-x: hidden;
+}
+
 /* === Login Page Styling === */
 .login-page {
     height: 100vh;
@@ -16,9 +24,9 @@ html, body {
     justify-content: center;
 }
 
-/* === Login Box (без тіні і прозорості) === */
+/* === Login Box === */
 .login-box {
-    background-color: #0d0d0d; /* такий же як і body */
+    background-color: #0d0d0d;
     border-radius: 0;
     padding: 2rem;
     box-shadow: none;
@@ -84,19 +92,46 @@ html, body {
     text-decoration: underline;
 }
 
+/* === Blog Posts Cards Fixing Layout === */
+.card-row {
+  max-width: 1920px;
+  margin: 0 auto;
+}
+
+.card-row .row {
+  overflow-anchor: none;
+}
+
+.card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #191A1C;
+  border-radius: 8px;
+  padding: 0;
+}
+
+.card-body {
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-text {
+  flex-grow: 1;
+}
+
+/* === Game Logo Strip === */
 .game-logos {
   margin-bottom: 90px !important;
 }
 
+/* === Tournament Cards === */
 .custom-card img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-}
-
-.card-row {
-  max-width: 1920px;
-  margin: 0 auto;
 }
 
 .no-wrap-cards {

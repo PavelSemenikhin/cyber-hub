@@ -12,7 +12,7 @@ class PostAdmin(admin.ModelAdmin):
 
 @admin.register(Comment)
 class CommentAdmin(admin.ModelAdmin):
-    list_display = ("post", "owner", "created_at",)
+    list_display = ("post", "owner", "created_at", "body",)
     search_fields = ("body", "owner__username", "post__title",)
     list_filter = ("created_at",)
     ordering = ("-created_at",)

@@ -2,7 +2,12 @@
 
 {% block content %}
   <div class="container mt-4">
-    <h1 class="mb-4">Список турнірів</h1>
+    <h1 class="mb-4">Tournaments</h1>
+
+    <div class="d-flex mb-4 gap-2">
+      <a href="?status=registration" class="btn {% if current_status == 'registration' %}btn-light{% else %}btn-outline-light{% endif %}">Registration</a>
+      <a href="?status=in_progress" class="btn {% if current_status == 'in_progress' %}btn-light{% else %}btn-outline-light{% endif %}">In progress</a>
+    </div>
 
     {% if tournaments %}
       <div class="row">
@@ -10,18 +15,23 @@
           <div class="col-12 mb-3">
             <div class="card w-100">
               <div class="card-body">
-                <h5 class="card-title"><a href="{% url 'tournaments:tournament-detail' tournament.pk %}">{{ tournament.title }}</a></h5>
+                <h5 class="card-title">
+                  <a href="{% url 'tournaments:tournament-detail' tournament.pk %}">{{ tournament.title }}</a>
+                  <span class="badge bg-secondary">{{ tournament.get_status_display }}</span>
+                </h5>
                 <p class="card-text">{{ tournament.description }}</p>
               </div>
               <div class="card-footer text-muted">
-                Створено: {{ tournament.created_at|date:"d.m.Y" }}
+                Start: {{ tournament.start_date|date:"d.m.Y" }} —
+                End: {{ tournament.end_date|date:"d.m.Y" }} |
+                Prize pool: {{ tournament.prize_pool }} UAH
               </div>
             </div>
           </div>
         {% endfor %}
       </div>
     {% else %}
-      <p>Наразі турнірів немає.</p>
+      <p>There are no tournaments at the moment.</p>
     {% endif %}
   </div>
 {% endblock %}

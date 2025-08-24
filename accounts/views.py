@@ -8,6 +8,7 @@ from django.contrib import messages
 
 from accounts.forms import RegisterForm, ProfileUpdateForm
 from accounts.models import User, Profile
+from blog.models import Post
 
 
 # Реєстрація нового користувача з автологіном
@@ -30,7 +31,9 @@ class ProfileView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         try:
-            context["profile"] = self.request.user.profile
+            user = self.request.user
+            context["profile"] = user.profile
+            context["posts"] = Post.objects.filter(owner=self.request.user).order_by("-created_at")
         except Profile.DoesNotExist:
             messages.error(self.request, "Ваш профіль ще не створено.")
             return redirect("home")

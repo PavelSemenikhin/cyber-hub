@@ -18,7 +18,6 @@ class Profile(models.Model):
     favorite_games = models.ManyToManyField("tournaments.Game", blank=True, related_name="profiles")
     discord = models.CharField(max_length=100, blank=True)
     telegram = models.CharField(max_length=100, blank=True)
-    avatar = models.ImageField(upload_to="avatars/", null=True, blank=True)
 
     def __str__(self):
         return self.nickname or self.user.username

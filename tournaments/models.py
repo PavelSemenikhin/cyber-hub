@@ -16,7 +16,9 @@ class Game(models.Model):
 #Сам турнір який має гру, та власника, має статус дату початку та кінця, опис та призовий фонд, упорядковування по даті початку
 class Tournament(models.Model):
     STATUS_CHOICES = [
-        ("active", "Active"),
+        ("registration", "Registration"),
+        ("upcoming", "Upcoming"),
+        ("in_progress", "In Progress"),
         ("finished", "Finished"),
     ]
 
@@ -24,7 +26,11 @@ class Tournament(models.Model):
     title = models.CharField(max_length=200)
     description = models.TextField(blank=True)
     game = models.ForeignKey(Game, on_delete=models.CASCADE, related_name="tournaments")
-    status = models.CharField(max_length=20, choices=STATUS_CHOICES, default="active")
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default="registration"
+    )
     start_at = models.DateTimeField()
     end_at = models.DateTimeField(null=True, blank=True)
     prize_pool = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)

@@ -1,6 +1,6 @@
 from django.urls import path
 
-from tournaments.views import HomePageView, TournamentListView, TournamentDetailView
+from tournaments.views import HomePageView, TournamentListView, TournamentDetailView, apply_to_tournament
 
 app_name = "tournaments"
 
@@ -10,4 +10,5 @@ urlpatterns = [
     path("", TournamentListView.as_view(), name="tournament-list"),
     #Роут на перегляд конкретного турніра
     path("<int:pk>/", TournamentDetailView.as_view(), name="tournament-detail"),
+    path("<int:pk>/apply/", apply_to_tournament, name="apply"),
 ]

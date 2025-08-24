@@ -3,28 +3,60 @@
 {% block title %}Мій профіль{% endblock %}
 
 {% block content %}
-  <div class="card bg-secondary text-light p-4">
-    <h2 class="mb-3">Мій профіль</h2>
+  <div class="container mt-4">
+    <div class="card bg-secondary text-light p-4 shadow-lg">
+      <h2 class="mb-4">👤 My Profile</h2>
 
-    {% if profile.avatar %}
-      <img src="{{ profile.avatar.url }}" alt="Аватар" class="img-thumbnail mb-3" style="max-width: 150px;">
-    {% endif %}
 
-    <p><strong>Нікнейм:</strong> {{ profile.nickname }}</p>
-    <p><strong>Ім'я користувача:</strong> {{ user.username }}</p>
-    <p><strong>Email:</strong> {{ user.email }}</p>
+        <div class="col-md-9">
+          <p><strong>Nickname:</strong> {{ profile.nickname }}</p>
+          <p><strong>Username:</strong> {{ user.username }}</p>
+          <p><strong>Email:</strong> {{ user.email }}</p>
+          <p><strong>Favourite games:</strong>
+            {% for game in profile.favorite_games.all %}
+              <span class="badge bg-primary me-1">{{ game.name }}</span>
+            {% empty %}
+              <span class="text-muted">Not specified</span>
+            {% endfor %}
+          </p>
+          <p><strong>Discord:</strong> {{ profile.discord }}</p>
+          <p><strong>Telegram:</strong> {{ profile.telegram }}</p>
 
-    <p><strong>Улюблені ігри:</strong>
-      {% for game in profile.favorite_games.all %}
-        {{ game.name }}{% if not forloop.last %}, {% endif %}
-      {% empty %}
-        Не вказано
-      {% endfor %}
-    </p>
+          <a href="{% url 'accounts:profile-update' %}" class="btn btn-outline-light mt-3">✏️ Edit Profile</a>
+        </div>
+      </div>
 
-    <p><strong>Discord:</strong> {{ profile.discord }}</p>
-    <p><strong>Telegram:</strong> {{ profile.telegram }}</p>
+      <hr class="my-4">
 
-    <a href="{% url 'accounts:profile-update' %}" class="btn btn-outline-light mt-3">Редагувати профіль</a>
+      <h3 class="mb-3">📝 My Posts</h3>
+
+      {% if posts %}
+        <div class="row">
+          {% for post in posts %}
+            <div class="col-md-6 mb-4">
+              <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    <a href="{% url 'blog:post-detail' post.pk %}" class="text-decoration-none">{{ post.title }}</a>
+                  </h5>
+                  <h6 class="card-subtitle mb-2 text-muted">{{ post.created_at|date:"d.m.Y H:i" }}</h6>
+                  <p class="card-text">{{ post.body|truncatewords:20 }}</p>
+                </div>
+                <div class="card-footer d-flex justify-content-between align-items-center">
+                  <span class="badge bg-dark">{{ post.game }}</span>
+                  {% if post.is_published %}
+                    <span class="text-success small">Published</span>
+                  {% else %}
+                    <span class="text-muted small">Draft</span>
+                  {% endif %}
+                </div>
+              </div>
+            </div>
+          {% endfor %}
+        </div>
+      {% else %}
+        <p class="text-muted">You have no published posts yet.</p>
+      {% endif %}
+    </div>
   </div>
 {% endblock %}
