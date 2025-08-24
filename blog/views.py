@@ -1,5 +1,6 @@
 from django.contrib import messages
 from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
+from django.db.models import Q
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic, View
@@ -14,13 +15,25 @@ class BlogListView(ListView):
     model = Post
     template_name = "blog/post_list.html"
     context_object_name = "posts"
-    paginate_by = 10
+    paginate_by = 8
 
     def get_queryset(self):
-        queryset = Post.objects.order_by("-created_at").prefetch_related("comments")
+        queryset = Post.objects.order_by("-created_at").prefetch_related("comments", "game", "owner")
+
         game_id = self.request.GET.get("game")
+        search_query = self.request.GET.get("search")
+
         if game_id:
             queryset = queryset.filter(game_id=game_id)
+
+        if search_query:
+            queryset = queryset.filter(
+                Q(title__icontains=search_query) |
+                Q(body__icontains=search_query) |
+                Q(owner__username__icontains=search_query) |
+                Q(game__name__icontains=search_query)
+            )
+
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -28,6 +41,7 @@ class BlogListView(ListView):
         from tournaments.models import Game
         context["games"] = Game.objects.all()
         context["selected_game_id"] = self.request.GET.get("game")
+        context["search_query"] = self.request.GET.get("search", "")
         return context
 
 
