@@ -8,14 +8,14 @@ from tournaments.models import Tournament, TournamentApplication
 from tournaments.forms import TournamentApplicationForm
 
 
-#Вью турнірів
+# Вью турнірів (не використовується, якщо є TournamentListView на головну)
 class HomePageView(ListView):
     model = Tournament
     template_name = "tournaments/home.html"
     context_object_name = "tournaments"
 
 
-#Вью сторінки всіх турнірів
+# Всі турніри з фільтром за статусом
 class TournamentListView(ListView):
     model = Tournament
     template_name = "tournaments/tournaments_list.html"
@@ -23,17 +23,26 @@ class TournamentListView(ListView):
 
     def get_queryset(self):
         status = self.request.GET.get("status")
-        if status in ["registration", "in_progress"]:
-            return Tournament.objects.filter(status=status)
-        return Tournament.objects.filter(status__in=["registration", "in_progress"])
+        queryset = Tournament.objects.all().order_by("-created_at")
+        if status:
+            queryset = queryset.filter(status=status)
+        return queryset
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        context["current_status"] = self.request.GET.get("status", "all")
+        context["current_status"] = self.request.GET.get("status", "")
+
+        if self.request.user.is_authenticated:
+            user_applications = TournamentApplication.objects.filter(user=self.request.user)
+            applied_ids = set(user_applications.values_list("tournament_id", flat=True))
+            context["applied_tournaments"] = applied_ids
+        else:
+            context["applied_tournaments"] = set()
+
         return context
 
 
-#Вью перегляду турніру
+# Перегляд конкретного турніру
 class TournamentDetailView(DetailView):
     model = Tournament
     template_name = "tournaments/tournament_detail.html"
@@ -46,6 +55,7 @@ class TournamentDetailView(DetailView):
         return context
 
 
+# Подача заявки на турнір
 @login_required
 def apply_to_tournament(request: HttpRequest, pk: int) -> HttpResponse:
     tournament = get_object_or_404(Tournament, pk=pk)
@@ -54,8 +64,18 @@ def apply_to_tournament(request: HttpRequest, pk: int) -> HttpResponse:
         messages.error(request, "Registration is closed.")
         return redirect("tournaments:tournament-detail", pk=pk)
 
+    if TournamentApplication.objects.filter(
+        user=request.user, status__in=["pending", "accepted"]
+    ).exclude(tournament=tournament).exists():
+        messages.warning(request, "You already applied to another tournament.")
+        return redirect("tournaments:tournament-detail", pk=pk)
+
     if TournamentApplication.objects.filter(tournament=tournament, user=request.user).exists():
         messages.warning(request, "You have already applied.")
+        return redirect("tournaments:tournament-detail", pk=pk)
+
+    if tournament.participants.count() >= 2:
+        messages.error(request, "Tournament already has 2 participants.")
         return redirect("tournaments:tournament-detail", pk=pk)
 
     if request.method == "POST":

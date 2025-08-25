@@ -6,14 +6,27 @@ html, body {
     background-color: #0d0d0d;
     color: #ffffff;
     font-family: 'Segoe UI', sans-serif;
-}
-
-html {
-    overflow-y: scroll;
-}
-
-body {
     overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+/* === Scrollbar Styling === */
+::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0d0d0d;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
 }
 
 /* === Login Page Styling === */
@@ -24,7 +37,6 @@ body {
     justify-content: center;
 }
 
-/* === Login Box === */
 .login-box {
     background-color: #0d0d0d;
     border-radius: 0;
@@ -35,7 +47,6 @@ body {
     max-width: 400px;
 }
 
-/* === Input Styling === */
 .login-box input[type="text"],
 .login-box input[type="password"],
 .login-box input[type="email"] {
@@ -56,7 +67,6 @@ body {
     box-shadow: 0 0 0 2px #ffffff20;
 }
 
-/* === Кнопка === */
 .login-box button {
     width: 100%;
     padding: 0.75rem;
@@ -73,7 +83,6 @@ body {
     transform: translateY(-1px);
 }
 
-/* === Посилання під кнопкою === */
 .login-box .extra-links {
     text-align: center;
     font-size: 0.85rem;
@@ -94,56 +103,138 @@ body {
 
 /* === Blog Posts Cards Fixing Layout === */
 .card-row {
-  max-width: 1920px;
-  margin: 0 auto;
+    max-width: 1920px;
+    margin: 0 auto;
 }
 
 .card-row .row {
-  overflow-anchor: none;
+    overflow-anchor: none;
 }
 
 .card {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  background-color: #191A1C;
-  border-radius: 8px;
-  padding: 0;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #191A1C;
+    border-radius: 8px;
+    padding: 0;
 }
 
 .card-body {
-  flex-grow: 1;
-  display: flex;
-  flex-direction: column;
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
 }
 
 .card-text {
-  flex-grow: 1;
+    flex-grow: 1;
 }
 
 /* === Game Logo Strip === */
 .game-logos {
-  margin-bottom: 90px !important;
+    margin-bottom: 90px !important;
 }
 
 /* === Tournament Cards === */
 .custom-card img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .no-wrap-cards {
-  flex-wrap: nowrap !important;
-  overflow-x: auto;
-  padding-bottom: 10px;
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    padding-bottom: 10px;
 }
 
+/* === Tournament Card Wrapper === */
 .custom-card {
-  width: 362px;
-  height: 538px;
-  background: transparent;
-  border: none;
-  flex: 0 0 auto;
+    width: 362px;
+    height: 538px;
+    background: transparent;
+    border: none;
+    flex: 0 0 auto;
+}
+
+/* === Хедер стилі === */
+.navbar-custom {
+    height: 64px;
+    background-color: #0d0d0d;
+}
+
+.navbar-brand img {
+    height: 40px;
+    width: auto;
+    vertical-align: middle;
+}
+
+.navbar-nav .nav-link {
+    color: white !important;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    line-height: 40px;
+}
+
+/* === Застосовано для кнопок у хедері === */
+.navbar-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-buttons .btn,
+.navbar-buttons a {
+    height: 40px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+/* Відступ зверху для всіх форм, щоб не прилягали до хедера */
+form {
+  margin-top: 1.5rem;
+}
+
+/* Уніфікація зовнішнього вигляду input/textarea для теми */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+    background-color: #191A1C;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    width: 100%;
+}
+
+/* Placeholders */
+::placeholder {
+  color: #888;
+}
+
+/* === Explore Button Custom === */
+.explore-btn {
+    background-color: #E46E07 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 999px !important;
+    padding: 0.75rem 2rem !important;
+    font-weight: 500;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.explore-btn:hover {
+    background-color: #ff7f18 !important;
+    color: white !important;
 }

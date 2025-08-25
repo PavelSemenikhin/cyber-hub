@@ -1,6 +1,8 @@
+from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path, include
 
+from config import settings
 from tournaments.views import HomePageView
 
 #Роут проекту
@@ -23,3 +25,6 @@ urlpatterns = [
     #Роут на сторінки блогу
     path("blog/", include("blog.urls", namespace="blog")),
 ]
+
+if settings.DEBUG:
+    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

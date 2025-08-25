@@ -19,48 +19,47 @@
 <body style="background-color: #0f0f0f; color: white; font-family: 'Inter', sans-serif;">
 
 <!-- Навбар -->
-<nav class="navbar navbar-expand-lg" style="background-color: #0f0f0f;">
-  <div class="container d-flex justify-content-between align-items-center">
+<nav class="navbar navbar-expand-lg" style="background-color: #0f0f0f; height: 53.65px;">
+  <div class="container d-flex justify-content-between align-items-center" style="height: 100%;">
 
-    <!-- Логотип без тексту -->
-    <a class="navbar-brand" href="/">
-      <img src="{% static 'img/logo.svg' %}" alt="CyberHub Logo" height="40">
+    <!-- Логотип -->
+    <a class="navbar-brand d-flex align-items-center" href="/" style="height: 100%;">
+      <img src="{% static 'img/logo.svg' %}" alt="CyberHub Logo" style="max-height: 53px;">
     </a>
 
     <!-- Меню -->
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav me-auto">
+    <div class="collapse navbar-collapse h-100 d-flex align-items-center" id="navbarNav">
+      <ul class="navbar-nav me-auto d-flex align-items-center h-100">
         <li class="nav-item">
-          <a class="nav-link text-white" href="{% url 'tournaments:tournament-list' %}">Tournaments</a>
+          <a class="nav-link text-white px-3" href="{% url 'tournaments:tournament-list' %}">Tournaments</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link text-white" href="{% url 'blog:blog' %}">Blog</a>
+          <a class="nav-link text-white px-3" href="{% url 'blog:blog' %}">Blog</a>
         </li>
       </ul>
     </div>
 
     <!-- Авторизація -->
     {% if request.user.is_authenticated %}
-      <div class="d-flex align-items-center gap-2">
-        <span class="text-light small">Привіт, {{ request.user.profile.nickname|default:request.user.username }}!</span>
-        <a href="{% url 'accounts:profile' %}" class="btn btn-outline-light btn-sm">Profile</a>
-        <form action="{% url 'logout' %}" method="post" style="display: inline;">
+      <div class="d-flex align-items-center gap-2" style="height: 100%;">
+        <span class="text-light small">Hello, {{ request.user.profile.nickname|default:request.user.username }}!</span>
+        <a href="{% url 'accounts:profile' %}" class="btn btn-outline-light px-4 py-2" style="height: 40px;">Profile</a>
+        <form action="{% url 'logout' %}" method="post" class="m-0 p-0" style="height: 100%;">
           {% csrf_token %}
-          <button type="submit" class="btn btn-danger btn-sm">Log Out</button>
+          <button type="submit" class="btn btn-danger px-4 py-2" style="height: 40px;">Log Out</button>
         </form>
       </div>
     {% else %}
-      <div class="d-flex gap-2">
-        <a href="{% url 'login' %}" class="btn btn-outline-light btn-sm">Log in</a>
-        <a href="{% url 'accounts:register' %}" class="btn btn-light btn-sm">Register</a>
+      <div class="d-flex gap-2" style="height: 100%;">
+        <a href="{% url 'login' %}" class="btn btn-outline-light px-4 py-2" style="height: 40px;">Log in</a>
+        <a href="{% url 'accounts:register' %}" class="btn btn-light px-4 py-2" style="height: 40px;">Register</a>
       </div>
     {% endif %}
-
   </div>
 </nav>
 
 <!-- Контент -->
-<main>
+<main class="mt-4 px-3">
   {% block content %}{% endblock %}
 </main>
 

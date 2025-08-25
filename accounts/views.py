@@ -9,6 +9,7 @@ from django.contrib import messages
 from accounts.forms import RegisterForm, ProfileUpdateForm
 from accounts.models import User, Profile
 from blog.models import Post
+from tournaments.models import TournamentApplication
 
 
 # Реєстрація нового користувача з автологіном
@@ -33,10 +34,17 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         try:
             user = self.request.user
             context["profile"] = user.profile
-            context["posts"] = Post.objects.filter(owner=self.request.user).order_by("-created_at")
+            context["posts"] = Post.objects.filter(owner=user).order_by("-created_at")
+
+            # Отримання поточного турніру, якщо є прийнята заявка
+            application = TournamentApplication.objects.filter(user=user, status="accepted").select_related("tournament").first()
+            if application:
+                context["current_tournament"] = application.tournament
+
         except Profile.DoesNotExist:
             messages.error(self.request, "Ваш профіль ще не створено.")
             return redirect("home")
+
         return context
 
 
