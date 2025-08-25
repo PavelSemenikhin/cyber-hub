@@ -238,3 +238,14 @@ textarea {
     background-color: #ff7f18 !important;
     color: white !important;
 }
+
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 6px 18px rgba(255, 255, 255, 0.05);
+    z-index: 2;
+}
+
