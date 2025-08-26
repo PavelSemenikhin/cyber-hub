@@ -8,7 +8,7 @@ from tournaments.models import Tournament, TournamentApplication
 from tournaments.forms import TournamentApplicationForm
 
 
-# Вью турнірів (не використовується, якщо є TournamentListView на головну)
+
 class HomePageView(ListView):
     model = Tournament
     template_name = "tournaments/home.html"

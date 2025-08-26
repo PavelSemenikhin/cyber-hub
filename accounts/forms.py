@@ -6,7 +6,6 @@ from accounts.models import User, Profile
 from tournaments.models import Game
 
 
-# Форма реєстрації користувача + валідація username + email(необов`язковий)
 class RegisterForm(UserCreationForm):
 
     class Meta:
@@ -17,14 +16,12 @@ class RegisterForm(UserCreationForm):
         super().__init__(*args, **kwargs)
         self.fields["email"].required = False
 
-    # Валідація username
     def clean_username(self):
         username = self.cleaned_data.get("username")
         if User.objects.filter(username=username).exists():
             raise ValidationError("Username already exists")
         return username
 
-    # Валідація Email
     def clean_email(self):
         email = self.cleaned_data.get("email")
         if email and User.objects.filter(email=email).exists():
