@@ -34,13 +34,16 @@
 - Тести: `pytest`, `pytest-django`, `coverage`
 - Code Style: `flake8`
 
-### 🗂 Структура проєкту
+---
+
+## 🗂 Структура проєкту
 
 <pre>
 cyber-hub/
 ├── 📂accounts/        # Реєстрація, профілі, автентифікація
 ├── 📂blog/            # Пости та коментарі
 ├── 📂tournaments/     # Турніри та заявки
+│   └── 📂fixtures/    # Тестові дані (JSON)
 ├── 📂templates/       # HTML-шаблони
 ├── 📂static/          # Статика (Bootstrap, іконки)
 ├── 📂tests/           # Усі тести (форми, моделі, вʼю)
@@ -49,6 +52,7 @@ cyber-hub/
 └── 📄requirements.txt # Залежності
 </pre>
 
+---
 
 ## 💻 Як запустити локально
 
@@ -60,3 +64,12 @@ source .venv/bin/activate  # або .venv\Scripts\activate на Windows
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
+
+
+
+
+📦 Тестові дані
+
+Щоб підвантажити демо-дані для турнірів, виконай:
+
+bash python manage.py loaddata fixtures/tournaments_fixture_final.json
