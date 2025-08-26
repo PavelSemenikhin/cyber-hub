@@ -1,6 +1,11 @@
 from django.contrib import admin
 from django.utils.safestring import mark_safe
-from tournaments.models import Game, Tournament, TournamentApplication, TournamentParticipant
+from tournaments.models import (
+    Game,
+    Tournament,
+    TournamentApplication,
+    TournamentParticipant
+)
 
 
 @admin.register(Game)
@@ -11,7 +16,9 @@ class GameAdmin(admin.ModelAdmin):
 
     def cover_preview(self, obj):
         if obj.cover:
-            return mark_safe(f'<img src="{obj.cover.url}" width="100" height="60" style="object-fit: cover;" />')
+            return mark_safe(
+                f'<img src="{obj.cover.url}" width="100"'
+                f' height="60" style="object-fit: cover;" />')
         return "(No image)"
 
     cover_preview.short_description = "Preview"
@@ -47,7 +54,11 @@ class TournamentApplicationAdmin(admin.ModelAdmin):
         "updated_at",
     )
     list_filter = ("status", "created_at")
-    search_fields = ("user__username", "tournament__title", "discord", "telegram")
+    search_fields = ("user__username",
+                     "tournament__title",
+                     "discord",
+                     "telegram"
+                     )
 
     def save_model(self, request, obj, form, change):
         super().save_model(request, obj, form, change)

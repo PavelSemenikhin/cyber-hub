@@ -47,8 +47,7 @@ ROOT_URLCONF = "config.urls"
 TEMPLATES = [
     {
         "BACKEND": "django.template.backends.django.DjangoTemplates",
-        "DIRS": [BASE_DIR / "templates"]
-        ,
+        "DIRS": [BASE_DIR / "templates"],
         "APP_DIRS": True,
         "OPTIONS": {
             "context_processors": [
@@ -125,6 +124,6 @@ LOGIN_REDIRECT_URL = "home"
 
 LOGOUT_REDIRECT_URL = "home"
 
-MEDIA_URL = '/media/'
+MEDIA_URL = "/media/"
 
-MEDIA_ROOT = BASE_DIR / 'media'
+MEDIA_ROOT = BASE_DIR / "media"

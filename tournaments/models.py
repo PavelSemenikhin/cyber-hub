@@ -39,7 +39,12 @@ class Tournament(models.Model):
     )
     start_at = models.DateTimeField()
     end_at = models.DateTimeField(null=True, blank=True)
-    prize_pool = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
+    prize_pool = models.DecimalField(
+        max_digits=10,
+        decimal_places=2,
+        blank=True,
+        null=True
+    )
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

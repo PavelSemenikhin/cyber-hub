@@ -1,6 +1,6 @@
 from django.contrib.auth import login
 from django.contrib.auth.mixins import LoginRequiredMixin
-from django.shortcuts import render, get_object_or_404, redirect
+from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse_lazy
 from django.views import generic
 from django.views.generic import TemplateView, UpdateView
@@ -34,10 +34,13 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         try:
             user = self.request.user
             context["profile"] = user.profile
-            context["posts"] = Post.objects.filter(owner=user).order_by("-created_at")
+            context["posts"] = Post.objects.filter(
+                owner=user).order_by("-created_at")
 
             # Отримання поточного турніру, якщо є прийнята заявка
-            application = TournamentApplication.objects.filter(user=user, status="accepted").select_related("tournament").first()
+            application = TournamentApplication.objects.filter(
+                user=user,
+                status="accepted").select_related("tournament").first()
             if application:
                 context["current_tournament"] = application.tournament
 

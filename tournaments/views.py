@@ -33,8 +33,15 @@ class TournamentListView(ListView):
         context["current_status"] = self.request.GET.get("status", "")
 
         if self.request.user.is_authenticated:
-            user_applications = TournamentApplication.objects.filter(user=self.request.user)
-            applied_ids = set(user_applications.values_list("tournament_id", flat=True))
+            user_applications = TournamentApplication.objects.filter(
+                user=self.request.user
+            )
+            applied_ids = set(
+                user_applications.values_list(
+                    "tournament_id",
+                    flat=True
+                )
+            )
             context["applied_tournaments"] = applied_ids
         else:
             context["applied_tournaments"] = set()
@@ -51,7 +58,8 @@ class TournamentDetailView(DetailView):
         context = super().get_context_data(**kwargs)
         tournament = self.get_object()
         if self.request.user.is_authenticated:
-            context["has_applied"] = tournament.applications.filter(user=self.request.user).exists()
+            context["has_applied"] = tournament.applications.filter(
+                user=self.request.user).exists()
         return context
 
 
@@ -70,7 +78,9 @@ def apply_to_tournament(request: HttpRequest, pk: int) -> HttpResponse:
         messages.warning(request, "You already applied to another tournament.")
         return redirect("tournaments:tournament-detail", pk=pk)
 
-    if TournamentApplication.objects.filter(tournament=tournament, user=request.user).exists():
+    if TournamentApplication.objects.filter(
+            tournament=tournament,
+            user=request.user).exists():
         messages.warning(request, "You have already applied.")
         return redirect("tournaments:tournament-detail", pk=pk)
 

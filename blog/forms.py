@@ -3,7 +3,7 @@ from django import forms
 from blog.models import Post, Comment
 
 
-#Форма створення посту
+# Форма створення посту
 class PostCreateForm(forms.ModelForm):
     class Meta:
         model = Post

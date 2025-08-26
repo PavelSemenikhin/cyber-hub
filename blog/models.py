@@ -6,9 +6,13 @@ from tournaments.models import Game
 
 # Моделі для блогу
 
-#Пост користувача
+# Пост користувача
 class Post(models.Model):
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE, related_name="posts")
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE,
+        related_name="posts"
+    )
     title = models.CharField(max_length=200, null=False, blank=False)
     body = models.TextField(null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
@@ -18,7 +22,7 @@ class Post(models.Model):
         Game,
         on_delete=models.SET_NULL,
         null=True, blank=True,
-    related_name="posts"
+        related_name="posts"
     )
 
     class Meta:
@@ -32,17 +36,22 @@ class Post(models.Model):
         return self.title
 
 
-#Коментарі до поста
+# Коментарі до поста
 class Comment(models.Model):
-    owner = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)
-    post = models.ForeignKey(Post,on_delete=models.CASCADE, related_name="comments")
+    owner = models.ForeignKey(
+        settings.AUTH_USER_MODEL,
+        on_delete=models.CASCADE
+    )
+    post = models.ForeignKey(
+        Post,
+        on_delete=models.CASCADE,
+        related_name="comments"
+    )
     body = models.TextField(null=False, blank=False)
     created_at = models.DateTimeField(auto_now_add=True)
-
 
     class Meta:
         ordering = ["created_at"]
 
     def __str__(self):
         return f"Comment by {self.owner.username} on {self.post.title}"
-
