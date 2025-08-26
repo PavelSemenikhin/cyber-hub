@@ -38,15 +38,15 @@
 
 <pre>
 cyber-hub/
-├── accounts/        # Реєстрація, профілі, автентифікація
-├── blog/            # Пости та коментарі
-├── tournaments/     # Турніри та заявки
-├── templates/       # HTML-шаблони
-├── static/          # Статика (Bootstrap, іконки)
-├── tests/           # Усі тести (форми, моделі, вʼю)
-├── config/          # Налаштування Django
-├── manage.py        # Точка входу
-└── requirements.txt # Залежності
+├── 📂accounts/        # Реєстрація, профілі, автентифікація
+├── 📂blog/            # Пости та коментарі
+├── 📂tournaments/     # Турніри та заявки
+├── 📂templates/       # HTML-шаблони
+├── 📂static/          # Статика (Bootstrap, іконки)
+├── 📂tests/           # Усі тести (форми, моделі, вʼю)
+├── 📂config/          # Налаштування Django
+├── 📄manage.py        # Точка входу
+└── 📄requirements.txt # Залежності
 </pre>
 
 
