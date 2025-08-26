@@ -72,4 +72,4 @@ python manage.py runserver
 
 Щоб підвантажити демо-дані для турнірів, виконай:
 
-bash python manage.py loaddata fixtures/tournaments_fixture_final.json
+python manage.py loaddata fixtures/tournaments_fixture_final.json
