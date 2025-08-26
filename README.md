@@ -1,4 +1,3 @@
-<<<<<<< dev
 # 🎮 CyberHub — Platform for the Gaming Community
 
 **CyberHub** is a web platform that combines a **blog**, a **tournament module**, and **personal gamer profiles**.  
