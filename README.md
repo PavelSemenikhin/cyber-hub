@@ -65,3 +65,10 @@ source .venv/bin/activate  # or .venv\Scripts\activate on Windows
 pip install -r requirements.txt
 python manage.py migrate
 python manage.py runserver
+
+
+📦 Тестові дані
+
+Щоб підвантажити демо-дані для турнірів, виконай:
+
+python manage.py loaddata fixtures/tournaments_fixture_final.json
