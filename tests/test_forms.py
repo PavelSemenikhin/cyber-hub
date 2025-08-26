@@ -1,8 +1,6 @@
 import pytest
-from accounts.forms import RegisterForm, ProfileUpdateForm
+from accounts.forms import RegisterForm
 from django.contrib.auth import get_user_model
-from accounts.models import Profile
-from tournaments.models import Game
 
 
 User = get_user_model()

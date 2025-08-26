@@ -4,7 +4,6 @@
 <div class="container mt-4">
   <h1 class="mb-4">Tournaments</h1>
 
-  <!-- Filter buttons -->
   <div class="d-flex mb-4 gap-2">
     <a href="?status=registration"
        class="btn {% if current_status == 'registration' %}btn-light{% else %}btn-outline-light{% endif %}">
@@ -21,9 +20,7 @@
       {% for tournament in tournaments %}
         <div class="p-4 rounded-4 text-white shadow-sm" style="background-color: #191A1C;">
 
-          <!-- Основний рядок: текст зліва + картинка справа -->
           <div class="row align-items-center">
-            <!-- Ліва частина — текст -->
             <div class="col-md-8">
               <div class="d-flex justify-content-between align-items-center mb-2">
                 <h4 class="mb-0">
@@ -57,7 +54,6 @@
               {% endif %}
             </div>
 
-            <!-- Права частина — зображення -->
             {% if tournament.game.cover %}
               <div class="col-md-4">
                 <img src="{{ tournament.game.cover.url }}"

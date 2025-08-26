@@ -1,9 +1,8 @@
 import pytest
 from django.urls import reverse
 from django.contrib.auth import get_user_model
-from accounts.models import Profile
 from blog.models import Post, Comment
-from tournaments.models import Game, Tournament, TournamentApplication
+from tournaments.models import Game
 
 User = get_user_model()
 
@@ -19,7 +18,12 @@ def test_blog_list_view(client):
 def test_post_detail_view(client):
     user = User.objects.create_user(username="testuser", password="testpass")
     game = Game.objects.create(name="Test Game")
-    post = Post.objects.create(owner=user, title="Test", body="Body", game=game)
+    post = Post.objects.create(
+        owner=user,
+        title="Test",
+        body="Body",
+        game=game
+    )
     url = reverse("blog:post-detail", kwargs={"pk": post.pk})
     response = client.get(url)
     assert response.status_code == 200
@@ -30,7 +34,12 @@ def test_post_detail_view(client):
 def test_post_detail_comment_submission(client):
     user = User.objects.create_user(username="testuser", password="testpass")
     game = Game.objects.create(name="Test Game")
-    post = Post.objects.create(owner=user, title="Test", body="Body", game=game)
+    post = Post.objects.create(
+        owner=user,
+        title="Test",
+        body="Body",
+        game=game
+    )
     client.force_login(user)
     url = reverse("blog:post-detail", kwargs={"pk": post.pk})
     data = {"body": "Great post!"}
@@ -55,7 +64,12 @@ def test_post_create_view(client):
 def test_post_update_view(client):
     user = User.objects.create_user(username="testuser", password="testpass")
     game = Game.objects.create(name="Test Game")
-    post = Post.objects.create(owner=user, title="Original", body="Body", game=game)
+    post = Post.objects.create(
+        owner=user,
+        title="Original",
+        body="Body",
+        game=game
+    )
     client.force_login(user)
     url = reverse("blog:post-update", kwargs={"pk": post.pk})
     data = {"title": "Updated", "body": "Updated content", "game": game.pk}

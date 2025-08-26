@@ -2,7 +2,6 @@ from django.db import models
 from django.conf import settings
 
 
-# Гра, з якої турнір (наприклад, Dota 2)
 class Game(models.Model):
     name = models.CharField(max_length=100, unique=True)
     cover = models.ImageField(upload_to='game_covers/', null=True, blank=True)
@@ -11,7 +10,6 @@ class Game(models.Model):
         return self.name
 
 
-# Сам турнір: створюється тільки адміністратором
 class Tournament(models.Model):
     STATUS_CHOICES = [
         ("registration", "Registration"),
@@ -57,7 +55,6 @@ class Tournament(models.Model):
         return self.status == "registration"
 
 
-# Заявка користувача на участь у турнірі (одна на турнір!)
 class TournamentApplication(models.Model):
     APPLICATION_STATUS_CHOICES = [
         ("pending", "Pending"),
@@ -94,7 +91,6 @@ class TournamentApplication(models.Model):
         return f"{self.user.username} in {self.tournament.title}"
 
 
-# Прийнятий учасник турніру (лише після затвердження адміністратором)
 class TournamentParticipant(models.Model):
     tournament = models.ForeignKey(
         Tournament,

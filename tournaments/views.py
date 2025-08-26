@@ -8,14 +8,12 @@ from tournaments.models import Tournament, TournamentApplication
 from tournaments.forms import TournamentApplicationForm
 
 
-
 class HomePageView(ListView):
     model = Tournament
     template_name = "tournaments/home.html"
     context_object_name = "tournaments"
 
 
-# Всі турніри з фільтром за статусом
 class TournamentListView(ListView):
     model = Tournament
     template_name = "tournaments/tournaments_list.html"
@@ -49,7 +47,6 @@ class TournamentListView(ListView):
         return context
 
 
-# Перегляд конкретного турніру
 class TournamentDetailView(DetailView):
     model = Tournament
     template_name = "tournaments/tournament_detail.html"
@@ -63,7 +60,6 @@ class TournamentDetailView(DetailView):
         return context
 
 
-# Подача заявки на турнір
 @login_required
 def apply_to_tournament(request: HttpRequest, pk: int) -> HttpResponse:
     tournament = get_object_or_404(Tournament, pk=pk)

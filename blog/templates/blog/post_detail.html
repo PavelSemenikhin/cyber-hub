@@ -6,24 +6,19 @@
 {% block content %}
 <div class="container mt-5 text-white">
 
-  <!-- Post title -->
   <h1 class="mb-3 fw-bold">{{ post.title }}</h1>
 
-  <!-- Game tag -->
   {% if post.game %}
     <span class="badge bg-success px-3 py-2 mb-3">{{ post.game.name }}</span>
   {% endif %}
 
-  <!-- Post content -->
   <p class="fs-5">{{ post.body }}</p>
 
-  <!-- Post metadata -->
   <p class="small mb-4">
     Posted on: {{ post.created_at|date:"d.m.Y" }} |
     Author: <strong>{{ post.owner }}</strong>
   </p>
 
-  <!-- Edit/Delete if user is the owner -->
   {% if request.user == post.owner %}
     <div class="mb-4">
       <a href="{% url 'blog:post-update' post.pk %}" class="btn btn-outline-light btn-sm me-2">✏️ Edit</a>
@@ -33,7 +28,6 @@
 
   <hr class="text-white">
 
-  <!-- Comments -->
   <h4 class="mb-3">💬 Comments ({{ post.comments.count }})</h4>
 
   {% if comments %}
@@ -61,7 +55,6 @@
     <p class="text-white-50">No comments yet.</p>
   {% endif %}
 
-  <!-- Add comment form -->
   {% if request.user.is_authenticated %}
     <hr class="text-white">
     <h5 class="mb-2">📝 Add a comment</h5>

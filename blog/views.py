@@ -9,7 +9,6 @@ from blog.forms import PostCreateForm, CommentForm
 from blog.models import Post, Comment
 
 
-# Вью для блогу та постів
 class BlogListView(ListView):
     model = Post
     template_name = "blog/post_list.html"
@@ -49,7 +48,6 @@ class BlogListView(ListView):
         return context
 
 
-# Вью ндля перегляду делатей посту
 class PostDetailView(DetailView):
     model = Post
     template_name = "blog/post_detail.html"
@@ -78,7 +76,6 @@ class PostDetailView(DetailView):
         return self.render_to_response(context)
 
 
-# Вью створення посту
 class PostCreateView(LoginRequiredMixin, generic.CreateView):
     model = Post
     form_class = PostCreateForm
@@ -92,7 +89,6 @@ class PostCreateView(LoginRequiredMixin, generic.CreateView):
         return reverse_lazy("blog:post-detail", kwargs={"pk": self.object.pk})
 
 
-# Вью на редагування посту
 class PostUpdateView(
     LoginRequiredMixin,
     UserPassesTestMixin,
@@ -114,7 +110,6 @@ class PostUpdateView(
         return reverse_lazy("blog:post-detail", kwargs={"pk": self.object.pk})
 
 
-# Вью для видалення посту
 class PostDeleteView(
     LoginRequiredMixin,
     UserPassesTestMixin,
@@ -133,7 +128,6 @@ class PostDeleteView(
         return super().delete(request, *args, **kwargs)
 
 
-# Вью для видалення коментара
 class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, View):
     def post(self, request, *args, **kwargs):
         comment = get_object_or_404(Comment, pk=self.kwargs["pk"])

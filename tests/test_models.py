@@ -2,7 +2,6 @@ import pytest
 from django.utils import timezone
 from datetime import timedelta
 from django.contrib.auth import get_user_model
-from accounts.models import Profile
 from blog.models import Post, Comment
 from tournaments.models import (
     Game,
@@ -42,7 +41,12 @@ def test_profile_favorite_games():
 def test_post_and_comment_models():
     user = User.objects.create_user(username="author", password="pass")
     game = Game.objects.create(name="Valorant")
-    post = Post.objects.create(title="Test Post", body="Content", owner=user, game=game)
+    post = Post.objects.create(
+        title="Test Post",
+        body="Content",
+        owner=user,
+        game=game
+    )
 
     assert str(post) == "Test Post"
     assert post.game == game
@@ -88,7 +92,8 @@ def test_tournament_and_related_models():
         user=user,
         tournament=tournament
     )
-    assert str(participant) == f"{user.username} — participant of {tournament.title}"
+    assert str(participant) == (f"{user.username}"
+                                f" — participant of {tournament.title}")
 
 
 @pytest.mark.django_db

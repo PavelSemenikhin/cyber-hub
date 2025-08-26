@@ -4,9 +4,6 @@ from django.conf import settings
 from tournaments.models import Game
 
 
-# Моделі для блогу
-
-# Пост користувача
 class Post(models.Model):
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
@@ -36,7 +33,6 @@ class Post(models.Model):
         return self.title
 
 
-# Коментарі до поста
 class Comment(models.Model):
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,

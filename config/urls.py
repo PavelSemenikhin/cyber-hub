@@ -26,7 +26,7 @@ urlpatterns = [
     path("blog/", include("blog.urls", namespace="blog")),
 ]
 
-# Вимкнути під час деплою
+
 if settings.DEBUG:
     urlpatterns += static(
         settings.MEDIA_URL,

@@ -3,7 +3,6 @@ from django.contrib.auth.models import AbstractUser
 from django.db import models
 
 
-# Модель користувача
 class User(AbstractUser):
     pass
 
@@ -11,7 +10,6 @@ class User(AbstractUser):
         return self.username
 
 
-# Профіль користувача 1/1
 class Profile(models.Model):
     user = models.OneToOneField(
         settings.AUTH_USER_MODEL,
