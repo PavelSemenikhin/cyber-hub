@@ -10,18 +10,8 @@ from tournaments.models import (
 
 @admin.register(Game)
 class GameAdmin(admin.ModelAdmin):
-    list_display = ("name", "cover_preview")
+    list_display = ("name",)
     search_fields = ("name",)
-    readonly_fields = ("cover_preview",)
-
-    def cover_preview(self, obj):
-        if obj.cover:
-            return mark_safe(
-                f'<img src="{obj.cover.url}" width="100"'
-                f' height="60" style="object-fit: cover;" />')
-        return "(No image)"
-
-    cover_preview.short_description = "Preview"
 
 
 @admin.register(Tournament)

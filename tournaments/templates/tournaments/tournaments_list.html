@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% load static %}
 
 {% block content %}
 <div class="container mt-4">
@@ -54,14 +55,24 @@
               {% endif %}
             </div>
 
-            {% if tournament.game.cover %}
-              <div class="col-md-4">
-                <img src="{{ tournament.game.cover.url }}"
-                     alt="{{ tournament.game.name }} cover"
-                     class="img-fluid rounded"
+            <div class="col-md-4">
+              {% if tournament.game.name == "Counter Strike 2" %}
+                <img src="{% static 'game_covers/cs2.png' %}" alt="CS2" class="img-fluid rounded"
                      style="object-fit: cover; width: 100%; max-height: 180px;">
-              </div>
-            {% endif %}
+              {% elif tournament.game.name == "Dota 2" %}
+                <img src="{% static 'game_covers/dota_2.png' %}" alt="Dota 2" class="img-fluid rounded"
+                     style="object-fit: cover; width: 100%; max-height: 180px;">
+              {% elif tournament.game.name == "FC 25" %}
+                <img src="{% static 'game_covers/fc25.png' %}" alt="FC25" class="img-fluid rounded"
+                     style="object-fit: cover; width: 100%; max-height: 180px;">
+              {% elif tournament.game.name == "Fortnite" %}
+                <img src="{% static 'game_covers/fortnite.png' %}" alt="Fortnite" class="img-fluid rounded"
+                     style="object-fit: cover; width: 100%; max-height: 180px;">
+              {% elif tournament.game.name == "PUBG" %}
+                <img src="{% static 'game_covers/pubg.png' %}" alt="PUBG" class="img-fluid rounded"
+                     style="object-fit: cover; width: 100%; max-height: 180px;">
+{% endif %}
+            </div>
           </div>
 
         </div>
