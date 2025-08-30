@@ -4,7 +4,12 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
 
-from tournaments.models import Tournament, TournamentApplication, TournamentStatus, ApplicationStatus
+from tournaments.models import (
+    Tournament,
+    TournamentApplication,
+    TournamentStatus,
+    ApplicationStatus,
+)
 from tournaments.forms import TournamentApplicationForm
 
 
@@ -40,10 +45,7 @@ class TournamentsListView(ListView):
                 user=self.request.user
             )
             applied_ids = set(
-                user_applications.values_list(
-                    "tournament_id",
-                    flat=True
-                )
+                user_applications.values_list("tournament_id", flat=True)
             )
             context["applied_tournaments"] = applied_ids
         else:
@@ -76,14 +78,13 @@ def apply_to_tournament(request: HttpRequest, pk: int) -> HttpResponse:
 
     if TournamentApplication.objects.filter(
         user=request.user,
-        status__in=[ApplicationStatus.PENDING, ApplicationStatus.ACCEPTED]
+        status__in=[ApplicationStatus.PENDING, ApplicationStatus.ACCEPTED],
     ).exclude(tournament=tournament).exists():
         messages.warning(request, "You already applied to another tournament.")
         return redirect("tournaments:tournament_detail", pk=pk)
 
     if TournamentApplication.objects.filter(
-        tournament=tournament,
-        user=request.user
+        tournament=tournament, user=request.user
     ).exists():
         messages.warning(request, "You have already applied.")
         return redirect("tournaments:tournament_detail", pk=pk)
@@ -107,5 +108,5 @@ def apply_to_tournament(request: HttpRequest, pk: int) -> HttpResponse:
     return render(
         request,
         "tournaments/apply.html",
-        {"form": form, "tournament": tournament}
+        {"form": form, "tournament": tournament},
     )

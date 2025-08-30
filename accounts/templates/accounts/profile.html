@@ -24,7 +24,7 @@
 
         {% if current_tournament %}
           <p><strong>Current Tournament:</strong>
-            <a href="{% url 'tournaments:tournament_detail' current_tournament.pk %}" class="link-light fw-bold">
+            <a href="{% url 'tournaments:tournament-detail' current_tournament.pk %}" class="link-light fw-bold">
               {{ current_tournament.title }}
             </a>
           </p>

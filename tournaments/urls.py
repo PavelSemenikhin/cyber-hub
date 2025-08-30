@@ -13,7 +13,7 @@ urlpatterns = [
     path(
         "<int:pk>/",
         TournamentDetailView.as_view(),
-        name="tournament_detail"
+        name="tournament-detail"
     ),
     path("<int:pk>/apply/", apply_to_tournament, name="apply"),
 ]
