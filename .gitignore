@@ -37,3 +37,7 @@ htmlcov/
 Thumbs.db
 
 staticfiles/
+
+static/**
+!static/css/
+!static/css/*.css

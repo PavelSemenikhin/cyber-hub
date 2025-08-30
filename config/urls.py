@@ -11,18 +11,9 @@ urlpatterns = [
 
 
     path("admin/", admin.site.urls),
-
-
     path("", HomePageView.as_view(), name="home"),
-
-
     path("tournaments/", include("tournaments.urls", namespace="tournaments")),
-
-
     path("accounts/", include("accounts.urls", namespace="accounts")),
-
     path("auth/", include("django.contrib.auth.urls")),
-
-
     path("blog/", include("blog.urls", namespace="blog")),
 ]

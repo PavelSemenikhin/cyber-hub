@@ -9,14 +9,13 @@ class Game(models.Model):
         return self.name
 
 
-class Tournament(models.Model):
-    STATUS_CHOICES = [
-        ("registration", "Registration"),
-        ("upcoming", "Upcoming"),
-        ("in_progress", "In Progress"),
-        ("finished", "Finished"),
-    ]
+class TournamentStatus(models.TextChoices):
+    REGISTRATION = "registration", "Registration"
+    IN_PROGRESS = "in_progress", "In progress"
+    FINISHED = "finished", "Finished"
 
+
+class Tournament(models.Model):
     owner = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -31,11 +30,11 @@ class Tournament(models.Model):
     )
     status = models.CharField(
         max_length=20,
-        choices=STATUS_CHOICES,
-        default="registration"
+        choices=TournamentStatus.choices,
+        default=TournamentStatus.REGISTRATION,
     )
     start_at = models.DateTimeField()
-    end_at = models.DateTimeField(null=True, blank=True)
+    end_at = models.DateTimeField(blank=True, null=True)
     prize_pool = models.DecimalField(
         max_digits=10,
         decimal_places=2,
@@ -51,16 +50,16 @@ class Tournament(models.Model):
         return f"{self.title} ({self.get_status_display()})"
 
     def is_registration_open(self):
-        return self.status == "registration"
+        return self.status == TournamentStatus.REGISTRATION
+
+
+class ApplicationStatus(models.TextChoices):
+    PENDING = "pending", "Pending"
+    ACCEPTED = "accepted", "Accepted"
+    REJECTED = "rejected", "Rejected"
 
 
 class TournamentApplication(models.Model):
-    APPLICATION_STATUS_CHOICES = [
-        ("pending", "Pending"),
-        ("accepted", "Accepted"),
-        ("rejected", "Rejected"),
-    ]
-
     tournament = models.ForeignKey(
         Tournament,
         on_delete=models.CASCADE,
@@ -76,15 +75,20 @@ class TournamentApplication(models.Model):
     about = models.TextField(blank=True)
     status = models.CharField(
         max_length=20,
-        choices=APPLICATION_STATUS_CHOICES,
-        default="pending"
+        choices=ApplicationStatus.choices,
+        default=ApplicationStatus.PENDING
     )
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
 
     class Meta:
-        unique_together = ("tournament", "user")
         ordering = ["-created_at"]
+        constraints = [
+            models.UniqueConstraint(
+                fields=["tournament", "user"],
+                name="unique_application"
+            )
+        ]
 
     def __str__(self):
         return f"{self.user.username} in {self.tournament.title}"
@@ -104,7 +108,12 @@ class TournamentParticipant(models.Model):
     joined_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:
-        unique_together = ("tournament", "user")
+        constraints = [
+            models.UniqueConstraint(
+                fields=["tournament", "user"],
+                name="unique_participant"
+            )
+        ]
 
     def __str__(self):
         return f"{self.user.username} — participant of {self.tournament.title}"

@@ -12,7 +12,6 @@ from blog.models import Post
 from tournaments.models import TournamentApplication
 
 
-# Реєстрація нового користувача з автологіном
 class RegisterView(generic.CreateView):
     model = User
     form_class = RegisterForm
@@ -25,7 +24,6 @@ class RegisterView(generic.CreateView):
         return response
 
 
-# Відображення профілю користувача
 class ProfileView(LoginRequiredMixin, TemplateView):
     template_name = "accounts/profile.html"
 
@@ -37,7 +35,6 @@ class ProfileView(LoginRequiredMixin, TemplateView):
             context["posts"] = Post.objects.filter(
                 owner=user).order_by("-created_at")
 
-            # Отримання поточного турніру, якщо є прийнята заявка
             application = TournamentApplication.objects.filter(
                 user=user,
                 status="accepted").select_related("tournament").first()
@@ -51,7 +48,6 @@ class ProfileView(LoginRequiredMixin, TemplateView):
         return context
 
 
-# Редагування профілю
 class ProfileUpdateView(LoginRequiredMixin, UpdateView):
     model = Profile
     form_class = ProfileUpdateForm

@@ -4,7 +4,7 @@ from django.http import HttpRequest, HttpResponse
 from django.shortcuts import render, get_object_or_404, redirect
 from django.views.generic import ListView, DetailView
 
-from tournaments.models import Tournament, TournamentApplication
+from tournaments.models import Tournament, TournamentApplication, TournamentStatus, ApplicationStatus
 from tournaments.forms import TournamentApplicationForm
 
 
@@ -14,14 +14,19 @@ class HomePageView(ListView):
     context_object_name = "tournaments"
 
 
-class TournamentListView(ListView):
+class TournamentsListView(ListView):
     model = Tournament
     template_name = "tournaments/tournaments_list.html"
     context_object_name = "tournaments"
 
     def get_queryset(self):
         status = self.request.GET.get("status")
-        queryset = Tournament.objects.all().order_by("-created_at")
+        queryset = (
+            super().get_queryset()
+            .select_related("game", "owner")
+            .prefetch_related("participants", "applications")
+            .order_by("-created_at")
+        )
         if status:
             queryset = queryset.filter(status=status)
         return queryset
@@ -53,10 +58,11 @@ class TournamentDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        tournament = self.get_object()
+        tournament = self.object
         if self.request.user.is_authenticated:
             context["has_applied"] = tournament.applications.filter(
-                user=self.request.user).exists()
+                user=self.request.user
+            ).exists()
         return context
 
 
@@ -64,25 +70,27 @@ class TournamentDetailView(DetailView):
 def apply_to_tournament(request: HttpRequest, pk: int) -> HttpResponse:
     tournament = get_object_or_404(Tournament, pk=pk)
 
-    if tournament.status != "registration":
+    if tournament.status != TournamentStatus.REGISTRATION:
         messages.error(request, "Registration is closed.")
-        return redirect("tournaments:tournament-detail", pk=pk)
+        return redirect("tournaments:tournament_detail", pk=pk)
 
     if TournamentApplication.objects.filter(
-        user=request.user, status__in=["pending", "accepted"]
+        user=request.user,
+        status__in=[ApplicationStatus.PENDING, ApplicationStatus.ACCEPTED]
     ).exclude(tournament=tournament).exists():
         messages.warning(request, "You already applied to another tournament.")
-        return redirect("tournaments:tournament-detail", pk=pk)
+        return redirect("tournaments:tournament_detail", pk=pk)
 
     if TournamentApplication.objects.filter(
-            tournament=tournament,
-            user=request.user).exists():
+        tournament=tournament,
+        user=request.user
+    ).exists():
         messages.warning(request, "You have already applied.")
-        return redirect("tournaments:tournament-detail", pk=pk)
+        return redirect("tournaments:tournament_detail", pk=pk)
 
     if tournament.participants.count() >= 2:
         messages.error(request, "Tournament already has 2 participants.")
-        return redirect("tournaments:tournament-detail", pk=pk)
+        return redirect("tournaments:tournament_detail", pk=pk)
 
     if request.method == "POST":
         form = TournamentApplicationForm(request.POST)
@@ -92,7 +100,7 @@ def apply_to_tournament(request: HttpRequest, pk: int) -> HttpResponse:
             application.tournament = tournament
             application.save()
             messages.success(request, "Application submitted successfully!")
-            return redirect("tournaments:tournament-detail", pk=pk)
+            return redirect("tournaments:tournament_detail", pk=pk)
     else:
         form = TournamentApplicationForm()
 

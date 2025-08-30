@@ -16,11 +16,11 @@ class BlogListView(ListView):
     paginate_by = 8
 
     def get_queryset(self):
-        queryset = Post.objects.order_by(
-            "-created_at").prefetch_related(
-            "comments",
-            "game",
-            "owner"
+        queryset = (
+            super().get_queryset()
+            .select_related("game", "owner")
+            .prefetch_related("comments")
+            .order_by("-created_at")
         )
 
         game_id = self.request.GET.get("game")
@@ -55,7 +55,7 @@ class PostDetailView(DetailView):
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
-        post = self.get_object()
+        post = self.object
         context["comments"] = post.comments.all()
         context["comment_count"] = post.comments.count()
         context["form"] = CommentForm()
@@ -86,20 +86,15 @@ class PostCreateView(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy("blog:post-detail", kwargs={"pk": self.object.pk})
+        return reverse_lazy("blog:post_detail", kwargs={"pk": self.object.pk})
 
 
-class PostUpdateView(
-    LoginRequiredMixin,
-    UserPassesTestMixin,
-    generic.UpdateView
-):
+class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
     model = Post
     form_class = PostCreateForm
     template_name = "blog/post_form.html"
 
     def form_valid(self, form):
-        form.instance.owner = self.request.user
         return super().form_valid(form)
 
     def test_func(self):
@@ -107,17 +102,13 @@ class PostUpdateView(
         return self.request.user == post.owner
 
     def get_success_url(self):
-        return reverse_lazy("blog:post-detail", kwargs={"pk": self.object.pk})
+        return reverse_lazy("blog:post_detail", kwargs={"pk": self.object.pk})
 
 
-class PostDeleteView(
-    LoginRequiredMixin,
-    UserPassesTestMixin,
-    generic.DeleteView
-):
+class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = Post
     template_name = "blog/post_confirm_delete.html"
-    success_url = reverse_lazy("blog:blog")
+    success_url = reverse_lazy("blog:post_list")
 
     def test_func(self):
         post = self.get_object()
@@ -133,7 +124,7 @@ class CommentDeleteView(LoginRequiredMixin, UserPassesTestMixin, View):
         comment = get_object_or_404(Comment, pk=self.kwargs["pk"])
         post_pk = comment.post.pk
         comment.delete()
-        return redirect("blog:post-detail", pk=post_pk)
+        return redirect("blog:post_detail", pk=post_pk)
 
     def test_func(self):
         comment = get_object_or_404(Comment, pk=self.kwargs["pk"])

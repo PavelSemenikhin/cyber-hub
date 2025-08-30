@@ -1,7 +1,7 @@
 from django.urls import path
 
 from tournaments.views import (
-    TournamentListView,
+    TournamentsListView,
     TournamentDetailView,
     apply_to_tournament
 )
@@ -9,11 +9,11 @@ from tournaments.views import (
 app_name = "tournaments"
 
 urlpatterns = [
-    path("", TournamentListView.as_view(), name="tournament-list"),
+    path("", TournamentsListView.as_view(), name="tournaments_list"),
     path(
         "<int:pk>/",
         TournamentDetailView.as_view(),
-        name="tournament-detail"
+        name="tournament_detail"
     ),
     path("<int:pk>/apply/", apply_to_tournament, name="apply"),
 ]
