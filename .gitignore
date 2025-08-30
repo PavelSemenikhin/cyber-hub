@@ -21,9 +21,19 @@ venv.bak/
 # Django
 *.log
 db.sqlite3
-/static/
 media/
+**/migrations/__pycache__/
+
+# Pytest
+.cache/
+pytest_cache/
+
+# Coverage
+.coverage
+htmlcov/
 
 # OS
 .DS_Store
 Thumbs.db
+
+staticfiles/

@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block title %}Home page - CyberHub{% endblock %}
+
+{% block content %}
+
+<section class="hero-section d-flex flex-column align-items-center text-white text-center px-3"
+         style="background-color: #0f0f0f; padding-top: 120px; padding-bottom: 40px;">
+
+  <div>
+    <h1 class="display-3 fw-bold mb-4">The Ultimate Esports &<br>Gaming Hub</h1>
+    <p class="lead text-secondary mb-5">
+      Discover esports events, share insights,<br>and connect with passionate players worldwide.
+    </p>
+    <a href="{% url 'tournaments:tournament-list' %}" class="btn btn-light btn-lg rounded-pill px-5 py-3">
+      Explore Tournaments
+    </a>
+  </div>
+
+  <div style="height: 60px;"></div>
+
+  <div class="game-logos container-fluid px-0 mb-5">
+    <img src="{% static 'img/logos.png' %}" alt="Game Logos"
+         class="w-100" style="opacity: 0.9;">
+  </div>
+
+</section>
+
+<section class="py-5" style="background-color: #0f0f0f;">
+  <div class="container-fluid d-flex justify-content-center px-0 no-wrap-cards">
+
+    <div class="custom-card me-3">
+      <img src="{% static 'img/dota2.jpg' %}" class="w-100 h-100 rounded-3 object-fit-cover" alt="Game Poster 1">
+    </div>
+
+    <div class="custom-card me-3">
+      <img src="{% static 'img/fc25.jpg' %}" class="w-100 h-100 rounded-3 object-fit-cover" alt="Game Poster 2">
+    </div>
+
+    <div class="custom-card me-3">
+      <img src="{% static 'img/pubg.jpg' %}" class="w-100 h-100 rounded-3 object-fit-cover" alt="Game Poster 3">
+    </div>
+
+    <div class="custom-card me-3">
+      <img src="{% static 'img/cs2.jpg' %}" class="w-100 h-100 rounded-3 object-fit-cover" alt="Game Poster 4">
+    </div>
+
+    <div class="custom-card">
+      <img src="{% static 'img/fortnite.jpg' %}" class="w-100 h-100 rounded-3 object-fit-cover" alt="Game Poster 5">
+    </div>
+
+  </div>
+</section>
+
+{% endblock %}
