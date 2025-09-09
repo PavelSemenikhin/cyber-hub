@@ -86,7 +86,7 @@ class PostCreateView(LoginRequiredMixin, generic.CreateView):
         return super().form_valid(form)
 
     def get_success_url(self):
-        return reverse_lazy("blog:post_detail", kwargs={"pk": self.object.pk})
+        return reverse_lazy("blog:post-detail", kwargs={"pk": self.object.pk})
 
 
 class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView):
@@ -102,13 +102,13 @@ class PostUpdateView(LoginRequiredMixin, UserPassesTestMixin, generic.UpdateView
         return self.request.user == post.owner
 
     def get_success_url(self):
-        return reverse_lazy("blog:post_detail", kwargs={"pk": self.object.pk})
+        return reverse_lazy("blog:post-detail", kwargs={"pk": self.object.pk})
 
 
 class PostDeleteView(LoginRequiredMixin, UserPassesTestMixin, generic.DeleteView):
     model = Post
     template_name = "blog/post_confirm_delete.html"
-    success_url = reverse_lazy("blog:post_list")
+    success_url = reverse_lazy("blog:blog")
 
     def test_func(self):
         post = self.get_object()
