@@ -83,24 +83,24 @@ def apply_to_tournament(request: HttpRequest, pk: int) -> HttpResponse:
 
     if tournament.status != TournamentStatus.REGISTRATION:
         messages.error(request, "Registration is closed.")
-        return redirect("tournaments:tournament_detail", pk=pk)
+        return redirect("tournaments:tournament-detail", pk=pk)
 
     if TournamentApplication.objects.filter(
         user=request.user,
         status__in=[ApplicationStatus.PENDING, ApplicationStatus.ACCEPTED],
     ).exclude(tournament=tournament).exists():
         messages.warning(request, "You already applied to another tournament.")
-        return redirect("tournaments:tournament_detail", pk=pk)
+        return redirect("tournaments:tournament-detail", pk=pk)
 
     if TournamentApplication.objects.filter(
         tournament=tournament, user=request.user
     ).exists():
         messages.warning(request, "You have already applied.")
-        return redirect("tournaments:tournament_detail", pk=pk)
+        return redirect("tournaments:tournament-detail", pk=pk)
 
     if tournament.participants.count() >= 2:
         messages.error(request, "Tournament already has 2 participants.")
-        return redirect("tournaments:tournament_detail", pk=pk)
+        return redirect("tournaments:tournament-detail", pk=pk)
 
     if request.method == "POST":
         form = TournamentApplicationForm(request.POST)
@@ -110,7 +110,7 @@ def apply_to_tournament(request: HttpRequest, pk: int) -> HttpResponse:
             application.tournament = tournament
             application.save()
             messages.success(request, "Application submitted successfully!")
-            return redirect("tournaments:tournament_detail", pk=pk)
+            return redirect("tournaments:tournament-detail", pk=pk)
     else:
         form = TournamentApplicationForm()
 
