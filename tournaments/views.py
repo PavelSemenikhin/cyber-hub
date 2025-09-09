@@ -70,10 +70,32 @@ class TournamentDetailView(DetailView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         tournament = self.object
+
         if self.request.user.is_authenticated:
-            context["has_applied"] = tournament.applications.filter(
-                user=self.request.user
-            ).exists()
+            other_application = TournamentApplication.objects.filter(
+                user=self.request.user,
+                tournament__status__in=[
+                    TournamentStatus.REGISTRATION,
+                    TournamentStatus.IN_PROGRESS
+                ],
+                status__in=[
+                    ApplicationStatus.PENDING,
+                    ApplicationStatus.ACCEPTED
+                ]
+            ).exclude(tournament=tournament).first()
+
+            this_application = TournamentApplication.objects.filter(
+                tournament=tournament,
+                user=self.request.user,
+            ).first()
+
+            context["has_applied"] = bool(other_application)
+            context["applied_tournament"] = other_application.tournament if other_application else None
+            context["has_applied_here"] = bool(this_application)
+
+            if this_application and this_application.status == ApplicationStatus.PENDING:
+                context["applied_here_pending"] = True
+
         return context
 
 
