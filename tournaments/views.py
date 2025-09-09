@@ -34,6 +34,10 @@ class TournamentsListView(ListView):
         )
         if status:
             queryset = queryset.filter(status=status)
+
+        for tournament in queryset:
+            tournament.update_status()
+
         return queryset
 
     def get_context_data(self, **kwargs):
@@ -57,6 +61,11 @@ class TournamentsListView(ListView):
 class TournamentDetailView(DetailView):
     model = Tournament
     template_name = "tournaments/tournament_detail.html"
+
+    def get_object(self, queryset=None):
+        obj = super().get_object(queryset)
+        obj.update_status()
+        return obj
 
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)

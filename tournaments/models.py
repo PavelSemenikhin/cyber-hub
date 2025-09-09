@@ -1,5 +1,6 @@
 from django.db import models
 from django.conf import settings
+from django.utils.timezone import now
 
 
 class Game(models.Model):
@@ -51,6 +52,20 @@ class Tournament(models.Model):
 
     def is_registration_open(self):
         return self.status == TournamentStatus.REGISTRATION
+
+    def update_status(self):
+        current_time = now()
+
+        if self.end_at and current_time > self.end_at:
+            new_status = TournamentStatus.FINISHED
+        elif self.start_at and current_time >= self.start_at:
+            new_status = TournamentStatus.IN_PROGRESS
+        else:
+            new_status = TournamentStatus.REGISTRATION
+
+        if self.status != new_status:
+            self.status = new_status
+            self.save(update_fields=["status"])
 
 
 class ApplicationStatus(models.TextChoices):
