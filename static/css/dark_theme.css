@@ -1,0 +1,238 @@
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+    background-color: #0d0d0d;
+    color: #ffffff;
+    font-family: 'Segoe UI', sans-serif;
+    overflow-x: hidden;
+    scroll-behavior: smooth;
+}
+
+::-webkit-scrollbar {
+    height: 8px;
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: #0d0d0d;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #444;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #888;
+}
+
+.login-page {
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.login-box {
+    background-color: #0d0d0d;
+    border-radius: 0;
+    padding: 2rem;
+    box-shadow: none;
+    border: none;
+    width: 100%;
+    max-width: 400px;
+}
+
+.login-box input[type="text"],
+.login-box input[type="password"],
+.login-box input[type="email"] {
+    width: 100%;
+    padding: 0.75rem 1rem;
+    margin-bottom: 1rem;
+    background-color: #1a1a1a;
+    border: none;
+    border-radius: 25px;
+    color: #ffffff;
+    font-size: 1rem;
+    outline: none;
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.login-box input:focus {
+    background-color: #1f1f1f;
+    box-shadow: 0 0 0 2px #ffffff20;
+}
+
+.login-box button {
+    width: 100%;
+    padding: 0.75rem;
+    border: none;
+    border-radius: 25px;
+    background-color: #ffffff;
+    color: #000000;
+    font-weight: bold;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.login-box button:hover {
+    background-color: #dddddd;
+    transform: translateY(-1px);
+}
+
+.login-box .extra-links {
+    text-align: center;
+    font-size: 0.85rem;
+    margin-top: 1rem;
+    color: #777777;
+}
+
+.login-box .extra-links a {
+    color: #777777;
+    margin: 0 0.5rem;
+    text-decoration: none;
+}
+
+.login-box .extra-links a:hover {
+    color: #aaaaaa;
+    text-decoration: underline;
+}
+
+.card-row {
+    max-width: 1920px;
+    margin: 0 auto;
+}
+
+.card-row .row {
+    overflow-anchor: none;
+}
+
+.card {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    background-color: #191A1C;
+    border-radius: 8px;
+    padding: 0;
+}
+
+.card-body {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.card-text {
+    flex-grow: 1;
+}
+
+.game-logos {
+    margin-bottom: 90px !important;
+}
+
+.custom-card img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.no-wrap-cards {
+    flex-wrap: nowrap !important;
+    overflow-x: auto;
+    padding-bottom: 10px;
+}
+
+.custom-card {
+    width: 362px;
+    height: 538px;
+    background: transparent;
+    border: none;
+    flex: 0 0 auto;
+}
+
+.navbar-custom {
+    height: 64px;
+    background-color: #0d0d0d;
+}
+
+.navbar-brand img {
+    height: 40px;
+    width: auto;
+    vertical-align: middle;
+}
+
+.navbar-nav .nav-link {
+    color: white !important;
+    font-size: 1rem;
+    padding: 0.5rem 1rem;
+    line-height: 40px;
+}
+
+.navbar-buttons {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.navbar-buttons .btn,
+.navbar-buttons a {
+    height: 40px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.9rem;
+    white-space: nowrap;
+}
+
+form {
+  margin-top: 1.5rem;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"],
+select,
+textarea {
+    background-color: #191A1C;
+    border: 1px solid #333;
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    width: 100%;
+}
+
+::placeholder {
+  color: #888;
+}
+
+.explore-btn {
+    background-color: #E46E07 !important;
+    color: white !important;
+    border: none !important;
+    border-radius: 999px !important;
+    padding: 0.75rem 2rem !important;
+    font-weight: 500;
+    font-size: 1.05rem;
+    transition: all 0.3s ease;
+    display: inline-block;
+    text-align: center;
+    text-decoration: none;
+}
+
+.explore-btn:hover {
+    background-color: #ff7f18 !important;
+    color: white !important;
+}
+
+.card {
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px) scale(1.02);
+    box-shadow: 0 6px 18px rgba(255, 255, 255, 0.05);
+    z-index: 2;
+}
+

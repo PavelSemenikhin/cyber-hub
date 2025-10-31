@@ -1,0 +1,140 @@
+{% extends "base.html" %}
+
+{% block title %}Blog{% endblock %}
+
+{% block content %}
+  <div class="container mt-4">
+    <h1 class="mb-4">Gaming Blog</h1>
+
+    <div class="d-flex flex-wrap align-items-center justify-content-between gap-3 mb-4">
+      <div class="d-flex flex-wrap align-items-center gap-2">
+        <span class="me-2 text-white">Filter by game:</span>
+        <a href="{% url 'blog:blog' %}" class="btn btn-outline-light rounded-pill {% if not selected_game_id %}active{% endif %}">All posts</a>
+        {% for game in games %}
+          <a href="{% url 'blog:blog' %}?game={{ game.id }}"
+             class="btn btn-outline-light rounded-pill {% if selected_game_id|default:'' == game.id|stringformat:"s" %}active{% endif %}">
+            {{ game.name }}
+          </a>
+        {% endfor %}
+      </div>
+
+      <form method="get" class="d-flex align-items-center" role="search" style="margin-top: 0;">
+        {% if selected_game_id %}
+          <input type="hidden" name="game" value="{{ selected_game_id }}">
+        {% endif %}
+        <input type="text"
+               name="search"
+               class="form-control rounded-pill me-2 border-secondary"
+               placeholder="Search"
+               value="{{ search_query }}"
+               style="min-width: 180px; background-color: white; color: #6c757d;">
+        <button type="submit" class="btn btn-outline-light rounded-pill">Search</button>
+      </form>
+
+      <div>
+        {% if request.user.is_authenticated %}
+          <a href="{% url 'blog:post-create' %}" class="btn btn-outline-light rounded-pill">Create post</a>
+        {% else %}
+          <a href="{% url 'login' %}?next={% url 'blog:post-create' %}" class="btn btn-outline-light rounded-pill">🔒 Login to create post</a>
+        {% endif %}
+      </div>
+    </div>
+
+    {% if posts %}
+      <div class="row row-cols-1 row-cols-md-2 g-4" style="overflow-anchor: none;">
+        {% for post in posts %}
+          <div class="col">
+            <div class="card h-100" style="background-color: #191A1C;">
+              <div class="card-body d-flex flex-column">
+                <h5 class="card-title">
+                  <a href="{% url 'blog:post-detail' post.pk %}" class="text-decoration-none" style="color: #ffffff;">
+                    {{ post.title }}
+                  </a>
+                </h5>
+
+                {% if post.game %}
+                  <span style="display: inline-block;
+                               background-color: #ffc107;
+                               color: #000;
+                               font-size: 0.65rem;
+                               padding: 2px 6px;
+                               border-radius: 4px;
+                               font-weight: bold;
+                               margin-bottom: 8px;
+                               max-width: max-content;">
+                    {{ post.game.name }}
+                  </span>
+                {% endif %}
+
+                <p class="card-text mt-2" style="color: #ffffff;">
+                  {{ post.body|truncatechars:200 }}
+                </p>
+              </div>
+              <div class="card-footer d-flex justify-content-between align-items-center text-white-50">
+                <div class="d-flex align-items-center">
+                  <i class="bi bi-calendar4 me-1"></i>
+                  <small>{{ post.created_at|date:"d.m.Y" }}</small>
+                  <span class="mx-2">|</span>
+                  <i class="bi bi-chat-left-text me-1"></i>
+                  <small>{{ post.comments.count }} comment{{ post.comments.count|pluralize }}</small>
+                </div>
+                <small><i class="bi bi-person-fill me-1"></i>{{ post.owner }}</small>
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+
+      {% if is_paginated %}
+        <nav class="mt-4" aria-label="Page navigation">
+          <ul class="pagination justify-content-center">
+
+            {% if page_obj.has_previous %}
+              <li class="page-item">
+                <a class="page-link bg-dark text-white border-secondary"
+                   href="?{% if selected_game_id %}game={{ selected_game_id }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}page={{ page_obj.previous_page_number }}"
+                   aria-label="Previous">
+                  <span aria-hidden="true">&laquo;</span>
+                </a>
+              </li>
+            {% else %}
+              <li class="page-item disabled">
+                <span class="page-link bg-dark text-secondary border-secondary" aria-hidden="true">&laquo;</span>
+              </li>
+            {% endif %}
+
+            {% for num in paginator.page_range %}
+              {% if page_obj.number == num %}
+                <li class="page-item active">
+                  <span class="page-link bg-secondary border-secondary">{{ num }}</span>
+                </li>
+              {% elif num > page_obj.number|add:'-3' and num < page_obj.number|add:'3' %}
+                <li class="page-item">
+                  <a class="page-link bg-dark text-white border-secondary"
+                     href="?{% if selected_game_id %}game={{ selected_game_id }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}page={{ num }}">{{ num }}</a>
+                </li>
+              {% endif %}
+            {% endfor %}
+
+            {% if page_obj.has_next %}
+              <li class="page-item">
+                <a class="page-link bg-dark text-white border-secondary"
+                   href="?{% if selected_game_id %}game={{ selected_game_id }}&{% endif %}{% if search_query %}search={{ search_query }}&{% endif %}page={{ page_obj.next_page_number }}"
+                   aria-label="Next">
+                  <span aria-hidden="true">&raquo;</span>
+                </a>
+              </li>
+            {% else %}
+              <li class="page-item disabled">
+                <span class="page-link bg-dark text-secondary border-secondary" aria-hidden="true">&raquo;</span>
+              </li>
+            {% endif %}
+
+          </ul>
+        </nav>
+      {% endif %}
+    {% else %}
+      <p>No posts available.</p>
+    {% endif %}
+  </div>
+{% endblock %}

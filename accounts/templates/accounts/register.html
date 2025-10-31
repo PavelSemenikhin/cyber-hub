@@ -1,0 +1,58 @@
+{% extends "base_auth.html" %}
+{% load static %}
+
+{% block title %}Sign up — CyberHub{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="{% static 'css/login.css' %}">
+{% endblock %}
+
+{% block content %}
+<div class="auth-container">
+
+  <div class="auth-image-wrapper">
+    <img src="{% static 'img/registration.jpg' %}" alt="Gamepad" class="auth-image">
+    <a href="{% url 'home' %}" class="logo-overlay">
+      <img src="{% static 'img/logo.svg' %}" alt="CyberHub Logo">
+    </a>
+  </div>
+
+  <div class="auth-form">
+    <div class="auth-box">
+      <div class="text-center fingerprint-icon mb-3">
+        <img src="{% static 'img/fingerprint.svg' %}" alt="Fingerprint Icon" class="fingerprint">
+      </div>
+
+      <h2 class="text-center">Create account</h2>
+
+      <form method="post">
+        {% csrf_token %}
+
+        {% for field in form %}
+          {% if field.errors %}
+            {% for error in field.errors %}
+              <div class="alert alert-danger">{{ error }}</div>
+            {% endfor %}
+          {% endif %}
+
+          <input
+            type="{{ field.field.widget.input_type }}"
+            name="{{ field.name }}"
+            id="id_{{ field.name }}"
+            placeholder="{{ field.label }}"
+            value="{{ field.value|default_if_none:'' }}"
+            {% if field.field.required %}required{% endif %}
+          >
+        {% endfor %}
+
+        <button type="submit">Register</button>
+      </form>
+
+      <div class="links mt-3">
+        <a href="{% url 'login' %}">Already have an account? Log in</a>
+      </div>
+    </div>
+  </div>
+
+</div>
+{% endblock %}

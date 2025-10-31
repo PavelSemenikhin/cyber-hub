@@ -1,0 +1,452 @@
+[
+  {
+    "model": "tournaments.tournament",
+    "pk": 1,
+    "fields": {
+      "title": "Турнір #1",
+      "description": "Опис турніру номер 1. Перевір свої сили!",
+      "prize_pool": 5766,
+      "status": "upcoming",
+      "start_at": "2025-08-12T00:00:00",
+      "end_at": "2025-08-17T00:00:00",
+      "created_at": "2025-08-11T00:00:00",
+      "game": 5,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 2,
+    "fields": {
+      "title": "Турнір #2",
+      "description": "Опис турніру номер 2. Перевір свої сили!",
+      "prize_pool": 9248,
+      "status": "in_progress",
+      "start_at": "2025-08-16T00:00:00",
+      "end_at": "2025-08-21T00:00:00",
+      "created_at": "2025-08-14T00:00:00",
+      "game": 1,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 3,
+    "fields": {
+      "title": "Турнір #3",
+      "description": "Опис турніру номер 3. Перевір свої сили!",
+      "prize_pool": 29985,
+      "status": "in_progress",
+      "start_at": "2025-08-03T00:00:00",
+      "end_at": "2025-08-04T00:00:00",
+      "created_at": "2025-08-01T00:00:00",
+      "game": 2,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 4,
+    "fields": {
+      "title": "Турнір #4",
+      "description": "Опис турніру номер 4. Перевір свої сили!",
+      "prize_pool": 27865,
+      "status": "in_progress",
+      "start_at": "2025-08-02T00:00:00",
+      "end_at": "2025-08-07T00:00:00",
+      "created_at": "2025-07-31T00:00:00",
+      "game": 2,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 5,
+    "fields": {
+      "title": "Турнір #5",
+      "description": "Опис турніру номер 5. Перевір свої сили!",
+      "prize_pool": 19483,
+      "status": "in_progress",
+      "start_at": "2025-08-19T00:00:00",
+      "end_at": "2025-08-23T00:00:00",
+      "created_at": "2025-08-17T00:00:00",
+      "game": 4,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 6,
+    "fields": {
+      "title": "Турнір #6",
+      "description": "Опис турніру номер 6. Перевір свої сили!",
+      "prize_pool": 46115,
+      "status": "finished",
+      "start_at": "2025-08-10T00:00:00",
+      "end_at": "2025-08-14T00:00:00",
+      "created_at": "2025-08-09T00:00:00",
+      "game": 2,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 7,
+    "fields": {
+      "title": "Турнір #7",
+      "description": "Опис турніру номер 7. Перевір свої сили!",
+      "prize_pool": 49163,
+      "status": "upcoming",
+      "start_at": "2025-08-21T00:00:00",
+      "end_at": "2025-08-22T00:00:00",
+      "created_at": "2025-08-20T00:00:00",
+      "game": 1,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 8,
+    "fields": {
+      "title": "Турнір #8",
+      "description": "Опис турніру номер 8. Перевір свої сили!",
+      "prize_pool": 24365,
+      "status": "upcoming",
+      "start_at": "2025-08-11T00:00:00",
+      "end_at": "2025-08-15T00:00:00",
+      "created_at": "2025-08-08T00:00:00",
+      "game": 4,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 9,
+    "fields": {
+      "title": "Турнір #9",
+      "description": "Опис турніру номер 9. Перевір свої сили!",
+      "prize_pool": 32680,
+      "status": "finished",
+      "start_at": "2025-08-04T00:00:00",
+      "end_at": "2025-08-06T00:00:00",
+      "created_at": "2025-08-01T00:00:00",
+      "game": 2,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 10,
+    "fields": {
+      "title": "Турнір #10",
+      "description": "Опис турніру номер 10. Перевір свої сили!",
+      "prize_pool": 18467,
+      "status": "upcoming",
+      "start_at": "2025-08-11T00:00:00",
+      "end_at": "2025-08-12T00:00:00",
+      "created_at": "2025-08-09T00:00:00",
+      "game": 5,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 11,
+    "fields": {
+      "title": "Турнір #11",
+      "description": "Опис турніру номер 11. Перевір свої сили!",
+      "prize_pool": 40607,
+      "status": "upcoming",
+      "start_at": "2025-08-17T00:00:00",
+      "end_at": "2025-08-22T00:00:00",
+      "created_at": "2025-08-14T00:00:00",
+      "game": 5,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 12,
+    "fields": {
+      "title": "Турнір #12",
+      "description": "Опис турніру номер 12. Перевір свої сили!",
+      "prize_pool": 35652,
+      "status": "upcoming",
+      "start_at": "2025-08-12T00:00:00",
+      "end_at": "2025-08-16T00:00:00",
+      "created_at": "2025-08-10T00:00:00",
+      "game": 4,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 13,
+    "fields": {
+      "title": "Турнір #13",
+      "description": "Опис турніру номер 13. Перевір свої сили!",
+      "prize_pool": 33726,
+      "status": "upcoming",
+      "start_at": "2025-08-02T00:00:00",
+      "end_at": "2025-08-03T00:00:00",
+      "created_at": "2025-07-30T00:00:00",
+      "game": 3,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 14,
+    "fields": {
+      "title": "Турнір #14",
+      "description": "Опис турніру номер 14. Перевір свої сили!",
+      "prize_pool": 32223,
+      "status": "finished",
+      "start_at": "2025-08-14T00:00:00",
+      "end_at": "2025-08-15T00:00:00",
+      "created_at": "2025-08-11T00:00:00",
+      "game": 2,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 15,
+    "fields": {
+      "title": "Турнір #15",
+      "description": "Опис турніру номер 15. Перевір свої сили!",
+      "prize_pool": 46574,
+      "status": "in_progress",
+      "start_at": "2025-08-20T00:00:00",
+      "end_at": "2025-08-25T00:00:00",
+      "created_at": "2025-08-18T00:00:00",
+      "game": 3,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 16,
+    "fields": {
+      "title": "Турнір #16",
+      "description": "Опис турніру номер 16. Перевір свої сили!",
+      "prize_pool": 30572,
+      "status": "finished",
+      "start_at": "2025-08-18T00:00:00",
+      "end_at": "2025-08-21T00:00:00",
+      "created_at": "2025-08-16T00:00:00",
+      "game": 1,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 17,
+    "fields": {
+      "title": "Турнір #17",
+      "description": "Опис турніру номер 17. Перевір свої сили!",
+      "prize_pool": 15420,
+      "status": "in_progress",
+      "start_at": "2025-08-10T00:00:00",
+      "end_at": "2025-08-11T00:00:00",
+      "created_at": "2025-08-09T00:00:00",
+      "game": 2,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 18,
+    "fields": {
+      "title": "Турнір #18",
+      "description": "Опис турніру номер 18. Перевір свої сили!",
+      "prize_pool": 16410,
+      "status": "finished",
+      "start_at": "2025-08-09T00:00:00",
+      "end_at": "2025-08-11T00:00:00",
+      "created_at": "2025-08-07T00:00:00",
+      "game": 3,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 19,
+    "fields": {
+      "title": "Турнір #19",
+      "description": "Опис турніру номер 19. Перевір свої сили!",
+      "prize_pool": 49497,
+      "status": "upcoming",
+      "start_at": "2025-08-05T00:00:00",
+      "end_at": "2025-08-09T00:00:00",
+      "created_at": "2025-08-04T00:00:00",
+      "game": 5,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 20,
+    "fields": {
+      "title": "Турнір #20",
+      "description": "Опис турніру номер 20. Перевір свої сили!",
+      "prize_pool": 47901,
+      "status": "registration",
+      "start_at": "2025-08-05T00:00:00",
+      "end_at": "2025-08-07T00:00:00",
+      "created_at": "2025-08-02T00:00:00",
+      "game": 5,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 21,
+    "fields": {
+      "title": "Турнір #21",
+      "description": "Опис турніру номер 21. Перевір свої сили!",
+      "prize_pool": 6571,
+      "status": "upcoming",
+      "start_at": "2025-08-06T00:00:00",
+      "end_at": "2025-08-11T00:00:00",
+      "created_at": "2025-08-04T00:00:00",
+      "game": 2,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 22,
+    "fields": {
+      "title": "Турнір #22",
+      "description": "Опис турніру номер 22. Перевір свої сили!",
+      "prize_pool": 17635,
+      "status": "registration",
+      "start_at": "2025-08-19T00:00:00",
+      "end_at": "2025-08-20T00:00:00",
+      "created_at": "2025-08-16T00:00:00",
+      "game": 4,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 23,
+    "fields": {
+      "title": "Турнір #23",
+      "description": "Опис турніру номер 23. Перевір свої сили!",
+      "prize_pool": 17537,
+      "status": "registration",
+      "start_at": "2025-08-19T00:00:00",
+      "end_at": "2025-08-23T00:00:00",
+      "created_at": "2025-08-17T00:00:00",
+      "game": 1,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 24,
+    "fields": {
+      "title": "Турнір #24",
+      "description": "Опис турніру номер 24. Перевір свої сили!",
+      "prize_pool": 25685,
+      "status": "finished",
+      "start_at": "2025-08-08T00:00:00",
+      "end_at": "2025-08-10T00:00:00",
+      "created_at": "2025-08-05T00:00:00",
+      "game": 2,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 25,
+    "fields": {
+      "title": "Турнір #25",
+      "description": "Опис турніру номер 25. Перевір свої сили!",
+      "prize_pool": 23098,
+      "status": "finished",
+      "start_at": "2025-08-06T00:00:00",
+      "end_at": "2025-08-08T00:00:00",
+      "created_at": "2025-08-03T00:00:00",
+      "game": 2,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 26,
+    "fields": {
+      "title": "Турнір #26",
+      "description": "Опис турніру номер 26. Перевір свої сили!",
+      "prize_pool": 44553,
+      "status": "registration",
+      "start_at": "2025-08-08T00:00:00",
+      "end_at": "2025-08-11T00:00:00",
+      "created_at": "2025-08-06T00:00:00",
+      "game": 1,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 27,
+    "fields": {
+      "title": "Турнір #27",
+      "description": "Опис турніру номер 27. Перевір свої сили!",
+      "prize_pool": 27745,
+      "status": "in_progress",
+      "start_at": "2025-08-01T00:00:00",
+      "end_at": "2025-08-06T00:00:00",
+      "created_at": "2025-07-29T00:00:00",
+      "game": 3,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 28,
+    "fields": {
+      "title": "Турнір #28",
+      "description": "Опис турніру номер 28. Перевір свої сили!",
+      "prize_pool": 35649,
+      "status": "upcoming",
+      "start_at": "2025-08-09T00:00:00",
+      "end_at": "2025-08-11T00:00:00",
+      "created_at": "2025-08-07T00:00:00",
+      "game": 1,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 29,
+    "fields": {
+      "title": "Турнір #29",
+      "description": "Опис турніру номер 29. Перевір свої сили!",
+      "prize_pool": 35825,
+      "status": "finished",
+      "start_at": "2025-08-09T00:00:00",
+      "end_at": "2025-08-14T00:00:00",
+      "created_at": "2025-08-06T00:00:00",
+      "game": 2,
+      "owner": 1
+    }
+  },
+  {
+    "model": "tournaments.tournament",
+    "pk": 30,
+    "fields": {
+      "title": "Турнір #30",
+      "description": "Опис турніру номер 30. Перевір свої сили!",
+      "prize_pool": 24058,
+      "status": "upcoming",
+      "start_at": "2025-08-15T00:00:00",
+      "end_at": "2025-08-17T00:00:00",
+      "created_at": "2025-08-14T00:00:00",
+      "game": 3,
+      "owner": 1
+    }
+  }
+]

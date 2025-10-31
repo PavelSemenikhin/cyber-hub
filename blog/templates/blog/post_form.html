@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% load form_filters %}
+
+{% block title %}
+  {% if object %}Edit post{% else %}New post{% endif %}
+{% endblock %}
+
+{% block content %}
+  <div class="container mt-5" style="max-width: 600px;">
+    <div class="card p-4 shadow-lg text-white" style="background-color: #191A1C;">
+      <h2 class="mb-4 text-center">
+        {% if object %}✏️ Edit Post{% else %}🆕 Create New Post{% endif %}
+      </h2>
+
+      <form method="post">
+        {% csrf_token %}
+
+        <div class="mb-3">
+          {{ form.title.label_tag }}
+          {{ form.title|add_class:"form-control bg-dark text-white border-0 shadow-sm" }}
+          {% if form.title.errors %}
+            <div class="form-text text-danger">{{ form.title.errors }}</div>
+          {% endif %}
+        </div>
+
+        <div class="mb-3">
+          {{ form.body.label_tag }}
+          {{ form.body|add_class:"form-control bg-dark text-white border-0 shadow-sm" }}
+          {% if form.body.errors %}
+            <div class="form-text text-danger">{{ form.body.errors }}</div>
+          {% endif %}
+        </div>
+
+        <div class="mb-3">
+          {{ form.game.label_tag }}
+          {{ form.game|add_class:"form-select bg-dark text-white border-0 shadow-sm" }}
+          {% if form.game.errors %}
+            <div class="form-text text-danger">{{ form.game.errors }}</div>
+          {% endif %}
+        </div>
+
+        <div class="text-center mt-4">
+          <button type="submit" class="btn btn-outline-light px-4 me-2">💾 Save</button>
+          <a href="{% if object %}{% url 'blog:post-detail' object.pk %}{% else %}{% url 'blog:blog' %}{% endif %}" class="btn btn-outline-secondary px-4">↩️ Cancel</a>
+        </div>
+      </form>
+    </div>
+  </div>
+{% endblock %}

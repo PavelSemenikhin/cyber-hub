@@ -1,4 +1,6 @@
-# Python
+# =====================
+# 🐍 PYTHON
+# =====================
 __pycache__/
 *.py[cod]
 *.pyo
@@ -6,7 +8,9 @@ __pycache__/
 *.pyc
 *.pdb
 
-# Env
+# =====================
+# 🛠 ENVIRONMENT
+# =====================
 .env
 .venv/
 venv/
@@ -14,16 +18,43 @@ ENV/
 env.bak/
 venv.bak/
 
-# IDE
+# =====================
+# 🧠 IDEs
+# =====================
 .idea/
 .vscode/
 
-# Django
+# =====================
+# ⚙️ DJANGO
+# =====================
 *.log
 db.sqlite3
-/static/
 media/
+**/migrations/__pycache__/
 
-# OS
+# =====================
+# ✅ STATIC FILES
+# =====================
+
+staticfiles/
+
+!static/
+!static/**
+
+# =====================
+# 🧪 TESTING
+# =====================
+.cache/
+pytest_cache/
+
+# =====================
+# 📈 COVERAGE
+# =====================
+.coverage
+htmlcov/
+
+# =====================
+# 🖥 OS SYSTEM FILES
+# =====================
 .DS_Store
 Thumbs.db
